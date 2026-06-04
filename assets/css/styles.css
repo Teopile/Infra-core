@@ -297,6 +297,8 @@ section[id], #top, #main { scroll-margin-top: 88px; }
 /* ---------- Why us / promises ---------- */
 .promises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .promise { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.16); border-radius: var(--r-lg); padding: 30px 26px; text-align: center; backdrop-filter: blur(4px); }
+.promise__ico { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 16px; color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.22); }
+.promise__ico svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .promise__num { display: block; font-size: clamp(2.4rem, 5vw, 3.2rem); font-weight: 900; line-height: 1; color: #fff; letter-spacing: -.03em; }
 .promise__num small { font-size: clamp(.9rem, 1.5vw, 1.1rem); font-weight: 700; color: var(--accent-cyan); margin-left: 5px; vertical-align: baseline; }
 .promise__t { margin-top: 14px; font-size: 1.1rem; color: #fff; }
