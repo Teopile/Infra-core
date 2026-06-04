@@ -1,134 +1,108 @@
 # Infra Core — Website
 
-Georgian-first (KA) marketing site for **Infra Core**, a B2B IT-solutions / office-equipment reseller.
-Design inspired by [noventiq.ge](https://noventiq.ge): clean enterprise look, navy + accent-blue,
-dark product-card grid, dark footer. Built as a **dependency-free static site** (HTML + CSS + vanilla JS) —
-no build step, hosts anywhere.
+Production marketing site for **Infra Core**, a B2B IT‑solutions / office‑equipment reseller.
+Built with **Next.js (App Router) + TypeScript**, Georgian‑first (KA) with an English (EN) toggle.
+Design inspired by [noventiq.ge](https://noventiq.ge) — clean navy + accent‑blue enterprise look.
 
-> Status: **prototype / v1** to show stakeholders. Phone, email and a few claims are **placeholders** —
-> see [Before going live](#before-going-live).
+> All on‑page content is faithful to what the client provided. Phone, the contact‑form key, and
+> the Telegram/WhatsApp links are **placeholders** — see [Before going live](#before-going-live).
 
 ---
 
-## Run locally
+## Stack
 
-It's a static site, so just open `index.html` — or serve it (recommended, so the fonts/form behave like production):
+- **Next.js 14 (App Router)** + **React 18** + **TypeScript**
+- **Static export** (`output: "export"`) — deploys to **GitHub Pages** *and* **Vercel** with no server
+- `next/font` self‑hosts **Noto Sans Georgian** (no render‑blocking font request)
+- Custom CSS design system in `app/globals.css` (no UI framework)
+- Contact form via **Web3Forms** (no backend needed)
+
+## Develop
 
 ```bash
-# Python 3
-python -m http.server 8080
-# then open http://localhost:8080
-
-# …or Node
-npx serve .
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # static export to ./out
 ```
 
-## File structure
+## Project structure
 
 ```
-.
-├── index.html            # the whole landing page (Georgian default, EN via toggle)
-├── assets/
-│   ├── css/styles.css    # design tokens + all components
-│   └── js/
-│       ├── i18n.js       # KA/EN dictionary + language toggle
-│       └── main.js       # nav, scroll reveal, form submit
-└── README.md
+app/
+  layout.tsx        # <html>, metadata (SEO/OG/Twitter), JSON‑LD, fonts, viewport
+  page.tsx          # the whole UI (client component): sections, nav, form, reveal, i18n toggle
+  globals.css       # design tokens + all component styles
+  sitemap.ts        # generates /sitemap.xml
+  robots.ts         # generates /robots.txt
+lib/
+  dictionaries.ts   # ALL copy, typed, in KA + EN
+public/
+  assets/og/og-cover.png        # social share image (1200×630)
+  assets/icons/*                # app icons
+  site.webmanifest
+.github/workflows/deploy.yml     # build + deploy to GitHub Pages on push
 ```
 
-## Sections
+## Editing content
 
-Top bar (phone/email + KA/EN switch) → sticky header → **Hero** → What-we-do → **Products grid**
-(Computers/Mini-PC, Monitors, Networking, Printers, Jabra headsets, Software) → **Services**
-(warranty, delivery & deployment, support, IT infrastructure) → **Why us** (warranty/SLA promises) →
-**Brands** → **How we work** (3 steps) → **Contact / quote form** → dark footer + floating Telegram/WhatsApp.
+All text lives in **`lib/dictionaries.ts`** as a typed `ka` / `en` pair. Edit both languages there;
+the `Dict` type guarantees nothing is missed. No HTML editing required.
 
----
+## Language
 
-## Bilingual content (KA / EN)
-
-- Georgian is the **default** and lives directly in `index.html`.
-- English translations live in `assets/js/i18n.js` (`EN` object), keyed by each element's `data-i18n` attribute.
-- The toggle (top-right `ქარ / EN`) swaps text and remembers the choice in `localStorage`.
-
-**To edit copy:** change the Georgian in `index.html` *and* the matching key's English in `i18n.js`.
-To add a new translatable element, give it `data-i18n="some_key"` and add `some_key` to the `EN` object.
+Georgian is the default; the top‑right `ქარ / EN` toggle swaps all copy and persists the choice in
+`localStorage`. The Georgian content is server‑rendered into the static HTML (good for SEO).
 
 ---
 
-## Wiring the contact form
+## Deploy
 
-The form (name, company, phone, email, sector, message, consent) uses **[Web3Forms](https://web3forms.com)** —
-free, no backend, unlimited submissions. Until it's configured, the form shows a friendly "not configured yet"
-message and does **not** send.
+### Vercel (recommended for production)
+1. [vercel.com/new](https://vercel.com/new) → import `Teopile/Infra-core` → **Deploy** (Next.js auto‑detected).
+2. Add env vars (below) in **Project → Settings → Environment Variables**.
+3. Point a custom domain in **Settings → Domains**; add the Cloudflare DNS record it shows
+   (`CNAME → cname.vercel-dns.com`, proxy **DNS only** so Vercel issues SSL).
 
-### 1) Get an access key
-1. Go to **web3forms.com**, enter the destination email (e.g. `info@infracore-consulting.com`), get an **Access Key**.
-2. In `index.html`, replace the placeholder:
-   ```html
-   <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY" />
-   ```
-   with your real key. That's it — submissions now arrive by **email**.
-
-### 2) Add a Telegram notification (recommended — instant, on every phone)
-This is the "notify us on a phone" channel. Two ways:
-
-- **Easiest:** in the Web3Forms dashboard, add the **Telegram** integration and connect your bot/chat.
-- **Manual bot:**
-  1. In Telegram, message **@BotFather** → `/newbot` → copy the **bot token**.
-  2. Add the bot to your team group, then open
-     `https://api.telegram.org/bot<TOKEN>/getUpdates` to find the group's **chat_id**.
-  3. Route the form to it via the Web3Forms webhook + **Make.com** (free tier), or a tiny serverless function
-     calling `https://api.telegram.org/bot<TOKEN>/sendMessage`.
-
-> **Note on "Facebook":** pushing form leads *into* a Facebook/Messenger inbox is unreliable (Meta's 24-hour
-> messaging window + 2025–26 API limits). Use the **Messenger chat button** for visitors, and **Telegram + email**
-> for the actual lead delivery. WhatsApp click-to-chat is wired on the floating button.
-
-### 3) Spam & consent (already in place)
-- **Honeypot** (`botcheck`) hidden field — drops bots automatically.
-- **Consent checkbox** is required before submit. If you collect data, publish a short **Privacy Policy** and
-  link it from the consent text (Georgian data-protection law tracks GDPR — confirm wording with counsel).
-- Add **Cloudflare Turnstile / hCaptcha** in the Web3Forms dashboard if spam appears.
+### GitHub Pages (automatic, free)
+`.github/workflows/deploy.yml` builds the static export with `DEPLOY_TARGET=pages`
+(serves under `/Infra-core`) and deploys on every push to `main`.
+Set the form key as a repo **secret** `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`, and the others as repo
+**variables** (Settings → Secrets and variables → Actions). Pages must be set to **Source: GitHub Actions**.
 
 ---
 
-## Deploy (free)
+## Environment variables
 
-Any static host works. Drag-and-drop the folder to **Netlify**, import to **Vercel**, or use **Cloudflare Pages**
-/ **GitHub Pages**. No build command, output dir = project root.
+Copy `.env.example` → `.env.local` (and set the same in Vercel / GitHub):
 
----
+| Var | Purpose |
+|---|---|
+| `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` | Contact‑form key — free at [web3forms.com](https://web3forms.com). Until set, the form shows an "email us" message and does not send. |
+| `NEXT_PUBLIC_TELEGRAM_URL` | Floating Telegram button target (e.g. `https://t.me/yourhandle`) |
+| `NEXT_PUBLIC_WHATSAPP_NUMBER` | Floating WhatsApp number (digits only) |
+| `NEXT_PUBLIC_PHONE_DISPLAY` / `NEXT_PUBLIC_PHONE_TEL` | Phone shown / dialed |
 
-## Before going live (replace placeholders)
-
-| Placeholder | Where | Replace with |
-|---|---|---|
-| `+995 500 00 00 00` | `index.html` (top bar, contact, footer) | real phone |
-| `YOUR_WEB3FORMS_ACCESS_KEY` | `index.html` form | real Web3Forms key |
-| `https://t.me/` | floating Telegram button | real Telegram link |
-| `https://wa.me/995500000000` | floating WhatsApp button | real WhatsApp number |
-| `ორშ–პარ 10:00–19:00` | top bar / footer | real business hours |
-| SLA numbers (4h / 2 days) | `index.html` + `i18n.js` (`pr2_*`, `pr3_*`) | confirmed real SLAs |
-| Brands list | `index.html` `#vendors` | only brands you actually supply |
-| `why_note` ("years of experience") | `index.html` + `i18n.js` | real team background |
-
-**Legal/trust notes (from the research):**
-- Keep vendor wording as **"we supply / official warranty"**. Only show an **"authorized partner"** badge for a brand
-  you hold a current agreement with.
-- Do **not** print "Microsoft Gold" or "Cisco Gold/Premier" — those tiers are retired (Microsoft → Solutions Partner;
-  Cisco → Cisco 360). The current list avoids badges by design.
-- Add real legal identity (company name + VAT/ID), a physical address + map, and a Privacy Policy page before launch.
+> **Form upgrade path:** the form currently posts to Web3Forms client‑side (works on static hosting).
+> Once on Vercel you can add a server route (`app/api/contact/route.ts`) that forwards to a **Telegram
+> bot** + email using server‑only secrets — remove `output: "export"` from `next.config.mjs` to enable it.
 
 ---
 
-## Accessibility & quality
+## Before going live
 
-- WCAG-minded: skip link, visible focus rings, labelled inputs, `aria` on icon buttons, `prefers-reduced-motion` respected.
-- Responsive at 375 / 768 / 1024 / 1440 px.
-- No external JS/CSS dependencies (only Google Fonts: Noto Sans Georgian).
+| Placeholder | Set via |
+|---|---|
+| 📞 Phone (`+995 5XX XX XX XX`) | `NEXT_PUBLIC_PHONE_*` env vars |
+| 📨 Contact form | `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` |
+| ✈️/💬 Telegram + WhatsApp | `NEXT_PUBLIC_TELEGRAM_URL`, `NEXT_PUBLIC_WHATSAPP_NUMBER` |
+| 🔗 canonical/OG domain | `SITE_URL` in `app/layout.tsx` + URLs in `app/sitemap.ts` / `app/robots.ts` |
 
-## Next steps (phase 2)
+**Content/legal notes:** brand band shows only client‑named brands (Beelink, Jabra); keep vendor wording
+as "we supply / official warranty" and only add an "authorized partner" badge for brands with a real
+agreement. Add the real legal entity (name + VAT/ID) and a Privacy Policy before launch.
 
-Sub-pages (per product category + per service), a real **Our Work** page once deployments exist,
-optional cart/installment checkout, blog for SEO. Can be ported into Astro/Next.js later if a CMS is wanted.
+## Accessibility & SEO
+
+Skip link, visible dual‑contrast focus rings, labelled inputs + `aria-invalid`, mobile‑nav focus trap +
+`inert`, `prefers-reduced-motion` respected; per‑request metadata, JSON‑LD `LocalBusiness`, generated
+sitemap/robots, optimized self‑hosted font.

@@ -4,8 +4,20 @@ Thumbs.db
 desktop.ini
 *.log
 
-# Tooling
+# Dependencies
 node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Env
+.env
+.env.local
+.env*.local
+
+# Tooling
 .vercel
 .wrangler/
 .cache/
