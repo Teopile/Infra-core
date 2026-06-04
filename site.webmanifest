@@ -1,0 +1,16 @@
+{
+  "name": "Infra Core",
+  "short_name": "Infra Core",
+  "description": "B2B IT solutions and office-equipment reseller in Tbilisi, Georgia.",
+  "lang": "ka",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0b1626",
+  "theme_color": "#0b1626",
+  "icons": [
+    { "src": "assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}
