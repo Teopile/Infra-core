@@ -245,7 +245,7 @@ export default function Home() {
       <header className={`header${scrolled ? " is-scrolled" : ""}`} id="header">
         <div className="container header__inner">
           <Brand />
-          <nav className="nav" id="nav" aria-label="Main navigation" ref={navRef}>
+          <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav" aria-label="Main navigation" ref={navRef}>
             <a href="#products" className="nav__link" onClick={closeNav}>{t.nav.products}</a>
             <a href="#services" className="nav__link" onClick={closeNav}>{t.nav.services}</a>
             <a href="#why" className="nav__link" onClick={closeNav}>{t.nav.why}</a>
@@ -268,7 +268,8 @@ export default function Home() {
 
         {/* HERO */}
         <section className="hero">
-          <div className="hero__bg" aria-hidden="true" />
+          <div className="hero__media" aria-hidden="true" />
+          <div className="hero__shade" aria-hidden="true" />
           <div className="container hero__inner">
             <div className="hero__content reveal">
               <span className="eyebrow eyebrow--light">{t.hero.eyebrow}</span>
@@ -287,22 +288,22 @@ export default function Home() {
                 ))}
               </ul>
             </div>
-            <div className="hero__card reveal">
-              <div className="herocard">
-                <div className="herocard__top">
-                  <span className="herocard__dot" aria-hidden="true" />
-                  <span className="herocard__label">{t.herocard.label}</span>
-                </div>
-                {t.herocard.rows.map((row) => (
-                  <div className="herocard__row" key={row}>
-                    <span>{row}</span>
-                    <b aria-hidden="true">✓</b>
-                  </div>
-                ))}
-                <div className="herocard__cta">
-                  <span className="herocard__big">{t.herocard.turnkey}</span>
-                </div>
+          </div>
+          <div className="container hero__dock reveal">
+            <div className="commerce-strip">
+              <div className="commerce-strip__head">
+                <span className="commerce-strip__dot" aria-hidden="true" />
+                <span>{t.herocard.label}</span>
               </div>
+              <div className="commerce-strip__items">
+                {t.herocard.rows.map((row) => (
+                  <span className="commerce-strip__item" key={row}>
+                    <span className="commerce-strip__ico" aria-hidden="true">{icoCheck}</span>
+                    <span>{row}</span>
+                  </span>
+                ))}
+              </div>
+              <strong className="commerce-strip__result">{t.herocard.turnkey}</strong>
             </div>
           </div>
         </section>
@@ -324,12 +325,12 @@ export default function Home() {
         </section>
 
         {/* PRODUCTS */}
-        <section className="section section--dark" id="products" aria-labelledby="prod-title">
+        <section className="section section--catalog" id="products" aria-labelledby="prod-title">
           <div className="container">
             <div className="sec-head reveal">
-              <span className="eyebrow eyebrow--light">{t.products.eyebrow}</span>
-              <h2 id="prod-title" className="sec-title sec-title--light">{t.products.title}</h2>
-              <p className="sec-lead sec-lead--light">{t.products.lead}</p>
+              <span className="eyebrow">{t.products.eyebrow}</span>
+              <h2 id="prod-title" className="sec-title">{t.products.title}</h2>
+              <p className="sec-lead">{t.products.lead}</p>
             </div>
             <div className="pgrid">
               {t.products.items.map((it, i) => (
