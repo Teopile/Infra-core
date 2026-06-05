@@ -409,7 +409,6 @@ section[id], #top, #main { scroll-margin-top: 92px; }
 }
 
 .hero__media {
-  background-image: url("/assets/hero/commerce-workspace.png");
   background-size: cover;
   background-position: center right;
   transform: scale(1.01);

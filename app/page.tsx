@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from "react";
 import { dictionaries, type Lang } from "@/lib/dictionaries";
+import heroImage from "@/public/assets/hero/commerce-workspace@2x.webp";
 
 const WEB3_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
 const TG_URL = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/";
@@ -268,7 +269,7 @@ export default function Home() {
 
         {/* HERO */}
         <section className="hero">
-          <div className="hero__media" aria-hidden="true" />
+          <div className="hero__media" aria-hidden="true" style={{ backgroundImage: `url(${heroImage.src})` }} />
           <div className="hero__shade" aria-hidden="true" />
           <div className="container hero__inner">
             <div className="hero__content reveal">
