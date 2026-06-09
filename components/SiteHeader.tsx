@@ -78,8 +78,8 @@ export function SiteHeader() {
 
   const closeNav = () => setNavOpen(false);
   const isActive = (href: string) => {
-    const base = href.split("#")[0];
-    return base === "/" ? pathname === "/" : pathname.startsWith(base);
+    if (href.includes("#")) return false; // hash links never mark the current page
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
   };
 
   return (

@@ -20,6 +20,11 @@ export default function Home() {
   const { t } = useLang();
   useReveal();
 
+  /* Both languages phrase the title as "everything … — delivered, set up,
+     supported"; the part after the dash is the promise, so it gets the
+     accent color (same move the reference uses on its promo banners). */
+  const [titleLead, titleAccent] = t.hero.title.split(" — ");
+
   return (
     <>
       {/* HERO */}
@@ -29,7 +34,15 @@ export default function Home() {
         <div className="container hero__inner">
           <div className="hero__content reveal">
             <span className="hero__kicker">{t.hero.eyebrow}</span>
-            <h1 className="hero__title">{t.hero.title}</h1>
+            <h1 className="hero__title">
+              {titleAccent ? (
+                <>
+                  {titleLead} — <span className="hero__title-accent">{titleAccent}</span>
+                </>
+              ) : (
+                t.hero.title
+              )}
+            </h1>
             <p className="hero__sub">{t.hero.sub}</p>
             <div className="hero__cta">
               <Link href="/contact" className="btn btn--primary btn--lg">{t.hero.cta1}</Link>
@@ -98,11 +111,11 @@ export default function Home() {
               return (
                 <Link href={`/products/${cat.slug}`} className="tile reveal" key={cat.slug}>
                   <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading="lazy" decoding="async" />
-                  <span className="tile__body">
+                  <div className="tile__body">
                     <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
-                    <span className="tile__title">{item.t}</span>
+                    <h3 className="tile__title">{item.t}</h3>
                     <span className="tile__more">{t.products.more} <em aria-hidden="true">→</em></span>
-                  </span>
+                  </div>
                 </Link>
               );
             })}

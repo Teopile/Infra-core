@@ -37,9 +37,9 @@ export function AboutView() {
       {/* WHY US */}
       <section className="section section--accent" aria-labelledby="why-title">
         <div className="container">
-          <div className="sec-head reveal">
-            <h2 id="why-title" className="sec-title sec-title--light">{t.why.title}</h2>
-          </div>
+          {/* The page hero already shows this exact title; keep the heading
+              for the document outline but not visually. */}
+          <h2 id="why-title" className="sr-only">{t.why.title}</h2>
           <div className="promises">
             {t.why.items.map((it, i) => (
               <div className="promise reveal" key={it.t}>

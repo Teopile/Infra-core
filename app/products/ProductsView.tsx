@@ -28,11 +28,11 @@ export function ProductsView() {
               return (
                 <Link href={`/products/${cat.slug}`} className="tile reveal" key={cat.slug}>
                   <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading="lazy" decoding="async" />
-                  <span className="tile__body">
+                  <div className="tile__body">
                     <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
-                    <span className="tile__title">{item.t}</span>
+                    <h2 className="tile__title">{item.t}</h2>
                     <span className="tile__more">{t.products.more} <em aria-hidden="true">→</em></span>
-                  </span>
+                  </div>
                 </Link>
               );
             })}
