@@ -11,7 +11,7 @@ const notoGeorgian = Noto_Sans_Georgian({
 });
 
 const ka = dictionaries.ka;
-const SITE_URL = "https://infracore-consulting.com";
+const SITE_URL = "https://infracoregeorgia.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

@@ -5,7 +5,7 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://infracore-consulting.com/",
+      url: "https://infracoregeorgia.com/",
       changeFrequency: "monthly",
       priority: 1,
     },
