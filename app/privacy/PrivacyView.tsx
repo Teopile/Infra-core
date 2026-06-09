@@ -12,7 +12,6 @@ export function PrivacyView() {
   return (
     <>
       <PageHero
-        eyebrow={p.updated}
         title={p.title}
         lead={p.intro}
         trail={[{ label: t.footer.privacy }]}
@@ -21,6 +20,7 @@ export function PrivacyView() {
       <section className="section">
         <div className="container">
           <div className="prose reveal">
+            <p className="prose__p">{p.updated}</p>
             {p.sections.map((s) => (
               <div key={s.h}>
                 <h2 className="prose__h">{s.h}</h2>

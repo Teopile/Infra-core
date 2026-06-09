@@ -14,6 +14,7 @@ import {
   icoCheck,
 } from "@/components/icons";
 import { productCategories } from "@/lib/catalog";
+import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 
 export default function Home() {
   const { t } = useLang();
@@ -27,7 +28,7 @@ export default function Home() {
         <div className="hero__shade" aria-hidden="true" />
         <div className="container hero__inner">
           <div className="hero__content reveal">
-            <span className="eyebrow eyebrow--light">{t.hero.eyebrow}</span>
+            <span className="hero__kicker">{t.hero.eyebrow}</span>
             <h1 className="hero__title">{t.hero.title}</h1>
             <p className="hero__sub">{t.hero.sub}</p>
             <div className="hero__cta">
@@ -79,38 +80,40 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRODUCTS */}
+      {/* PRODUCT CATALOG */}
       <section className="section section--catalog" id="products" aria-labelledby="prod-title">
         <div className="container">
-          <div className="sec-head reveal">
-            <span className="eyebrow">{t.products.eyebrow}</span>
-            <h2 id="prod-title" className="sec-title">{t.products.title}</h2>
-            <p className="sec-lead">{t.products.lead}</p>
+          <div className="sec-head sec-head--row reveal">
+            <div>
+              <h2 id="prod-title" className="sec-title">{t.products.title}</h2>
+              <p className="sec-lead">{t.products.lead}</p>
+            </div>
+            <Link href="/products" className="sec-head__link">
+              {t.hero.cta2} <em aria-hidden="true">→</em>
+            </Link>
           </div>
-          <div className="pgrid">
+          <div className="tilegrid">
             {productCategories.map((cat) => {
               const item = t.products.items[cat.index];
               return (
-                <Link href={`/products/${cat.slug}`} className="pcard reveal" key={cat.slug}>
-                  <span className="pcard__ico">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
-                  <h3 className="pcard__title">{item.t}</h3>
-                  <p className="pcard__text">{item.d}</p>
-                  <span className="pcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                <Link href={`/products/${cat.slug}`} className="tile reveal" key={cat.slug}>
+                  <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading="lazy" decoding="async" />
+                  <span className="tile__body">
+                    <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
+                    <span className="tile__title">{item.t}</span>
+                    <span className="tile__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                  </span>
                 </Link>
               );
             })}
-          </div>
-          <div className="sec-cta reveal">
-            <Link href="/products" className="btn btn--primary btn--lg">{t.hero.cta2}</Link>
           </div>
         </div>
       </section>
 
       {/* SERVICES */}
-      <section className="section" id="services" aria-labelledby="serv-title">
+      <section className="section section--soft" id="services" aria-labelledby="serv-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow">{t.services.eyebrow}</span>
             <h2 id="serv-title" className="sec-title">{t.services.title}</h2>
             <p className="sec-lead">{t.services.lead}</p>
           </div>
@@ -132,7 +135,6 @@ export default function Home() {
       <section className="section section--accent" id="why" aria-labelledby="why-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow eyebrow--light">{t.why.eyebrow}</span>
             <h2 id="why-title" className="sec-title sec-title--light">{t.why.title}</h2>
           </div>
           <div className="promises">
@@ -150,9 +152,13 @@ export default function Home() {
       {/* VENDORS */}
       <section className="section" id="vendors" aria-labelledby="ven-title">
         <div className="container">
-          <div className="sec-head reveal">
-            <span className="eyebrow">{t.vendors.eyebrow}</span>
-            <h2 id="ven-title" className="sec-title">{t.vendors.title}</h2>
+          <div className="sec-head sec-head--row reveal">
+            <div>
+              <h2 id="ven-title" className="sec-title">{t.vendors.title}</h2>
+            </div>
+            <Link href="/brands" className="sec-head__link">
+              {t.nav.vendors} <em aria-hidden="true">→</em>
+            </Link>
           </div>
           <div className="vendors reveal" role="list" lang="en">
             {t.vendors.brands.map((b) => (
@@ -160,9 +166,6 @@ export default function Home() {
             ))}
           </div>
           <p className="vendors__note reveal">{t.vendors.note}</p>
-          <div className="sec-cta reveal">
-            <Link href="/brands" className="btn btn--ghost btn--lg btn--ghost-ink">{t.nav.vendors}</Link>
-          </div>
         </div>
       </section>
 
@@ -170,7 +173,6 @@ export default function Home() {
       <section className="section section--soft" id="process" aria-labelledby="proc-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow">{t.process.eyebrow}</span>
             <h2 id="proc-title" className="sec-title">{t.process.title}</h2>
           </div>
           <div className="steps">

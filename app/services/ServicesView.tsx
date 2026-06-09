@@ -13,7 +13,6 @@ export function ServicesView() {
   return (
     <>
       <PageHero
-        eyebrow={t.services.eyebrow}
         title={t.services.title}
         lead={t.services.lead}
         trail={[{ label: t.nav.services }]}
@@ -38,7 +37,6 @@ export function ServicesView() {
       <section className="section section--soft" aria-labelledby="proc-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow">{t.process.eyebrow}</span>
             <h2 id="proc-title" className="sec-title">{t.process.title}</h2>
           </div>
           <div className="steps">

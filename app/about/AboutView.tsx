@@ -13,7 +13,6 @@ export function AboutView() {
   return (
     <>
       <PageHero
-        eyebrow={t.why.eyebrow}
         title={t.why.title}
         lead={t.pages.aboutLead}
         trail={[{ label: t.nav.why }]}
@@ -39,7 +38,6 @@ export function AboutView() {
       <section className="section section--accent" aria-labelledby="why-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow eyebrow--light">{t.why.eyebrow}</span>
             <h2 id="why-title" className="sec-title sec-title--light">{t.why.title}</h2>
           </div>
           <div className="promises">
@@ -58,7 +56,6 @@ export function AboutView() {
       <section className="section section--soft" id="process" aria-labelledby="proc-title">
         <div className="container">
           <div className="sec-head reveal">
-            <span className="eyebrow">{t.process.eyebrow}</span>
             <h2 id="proc-title" className="sec-title">{t.process.title}</h2>
           </div>
           <div className="steps">

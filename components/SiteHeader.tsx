@@ -5,8 +5,10 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Brand } from "./Brand";
 import { useLang } from "./LanguageProvider";
+import { icoPhone } from "./icons";
+import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
-const MOBILE_BREAKPOINT = 1120;
+const MOBILE_BREAKPOINT = 1200;
 
 /** Sticky site header with responsive nav drawer, scrim, focus management. */
 export function SiteHeader() {
@@ -99,6 +101,13 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header__actions">
+            <a href={PHONE_HREF} className="header__contact" aria-label={PHONE_DISPLAY}>
+              <span className="header__contact-ico" aria-hidden="true">{icoPhone}</span>
+              <span className="header__contact-txt">
+                <strong>{PHONE_DISPLAY}</strong>
+                <small>{EMAIL}</small>
+              </span>
+            </a>
             <Link href="/contact" className="btn btn--primary btn--sm header__cta">{t.nav.quote}</Link>
             <button type="button" className="navtoggle" ref={toggleRef} aria-label="Menu" aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>
               <span /><span /><span />

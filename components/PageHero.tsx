@@ -9,15 +9,14 @@ export interface Crumb {
 }
 
 interface PageHeroProps {
-  eyebrow?: string;
   title: string;
   lead?: string;
   /** Trail after "Home"; the last crumb is rendered as the current page. */
   trail?: Crumb[];
 }
 
-/** Compact subpage header with a breadcrumb, eyebrow, title and optional lead. */
-export function PageHero({ eyebrow, title, lead, trail = [] }: PageHeroProps) {
+/** Compact subpage header with a breadcrumb, title and optional lead. */
+export function PageHero({ title, lead, trail = [] }: PageHeroProps) {
   const { t } = useLang();
   return (
     <section className="page-hero">
@@ -42,7 +41,6 @@ export function PageHero({ eyebrow, title, lead, trail = [] }: PageHeroProps) {
             })}
           </ol>
         </nav>
-        {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
         <h1 className="page-hero__title">{title}</h1>
         {lead ? <p className="page-hero__lead">{lead}</p> : null}
       </div>

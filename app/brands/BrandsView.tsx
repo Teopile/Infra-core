@@ -5,8 +5,8 @@ import { useLang } from "@/components/LanguageProvider";
 import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
-import { PRODUCT_ICON_BY_SLUG } from "@/components/icons";
 import { getCategory } from "@/lib/catalog";
+import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 import type { ProductSlug } from "@/components/icons";
 
 // Each supplied brand maps to the product category it belongs to, so the
@@ -23,7 +23,6 @@ export function BrandsView() {
   return (
     <>
       <PageHero
-        eyebrow={t.vendors.eyebrow}
         title={t.vendors.title}
         lead={t.pages.brandsLead}
         trail={[{ label: t.nav.vendors }]}
@@ -37,10 +36,12 @@ export function BrandsView() {
               const item = cat ? t.products.items[cat.index] : undefined;
               return (
                 <Link href={`/products/${b.slug}`} className="brandcard reveal" key={b.name}>
-                  <span className="brandcard__ico" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[b.slug]}</span>
-                  <span className="brandcard__name" lang="en">{b.name}</span>
-                  {item ? <span className="brandcard__text">{item.d}</span> : null}
-                  <span className="pcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                  <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} alt="" loading="lazy" decoding="async" />
+                  <span className="brandcard__body">
+                    <span className="brandcard__name" lang="en">{b.name}</span>
+                    {item ? <span className="brandcard__text">{item.d}</span> : null}
+                    <span className="brandcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                  </span>
                 </Link>
               );
             })}

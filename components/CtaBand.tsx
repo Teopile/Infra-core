@@ -13,7 +13,7 @@ export function CtaBand() {
           <h2 className="sec-title sec-title--light">{t.pages.cta.title}</h2>
           <p className="sec-lead sec-lead--light">{t.pages.cta.text}</p>
         </div>
-        <Link href="/contact" className="btn btn--primary btn--lg">{t.pages.cta.button}</Link>
+        <Link href="/contact" className="btn btn--inverse btn--lg">{t.pages.cta.button}</Link>
       </div>
     </section>
   );

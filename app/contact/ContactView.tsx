@@ -14,7 +14,6 @@ export function ContactView() {
   return (
     <>
       <PageHero
-        eyebrow={t.contact.eyebrow}
         title={t.contact.title}
         lead={t.contact.lead}
         trail={[{ label: t.nav.contact }]}

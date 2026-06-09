@@ -7,6 +7,7 @@ import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
 import { PRODUCT_ICON_BY_SLUG, icoCheck } from "@/components/icons";
 import { getCategory, productCategories } from "@/lib/catalog";
+import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 import type { ProductSlug } from "@/components/icons";
 
 export function ProductDetailView({ slug }: { slug: ProductSlug }) {
@@ -23,7 +24,6 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
   return (
     <>
       <PageHero
-        eyebrow={t.products.eyebrow}
         title={item.t}
         lead={item.d}
         trail={[
@@ -35,7 +35,9 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
       <section className="section">
         <div className="container detail">
           <div className="detail__main reveal">
-            <span className="detail__ico">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
+            <figure className="detail__photo">
+              <img src={CATEGORY_IMAGE[slug].src} alt={item.t} loading="eager" decoding="async" />
+            </figure>
             <h2 className="detail__h">{t.pages.included}</h2>
             <ul className="ticks">
               {bullets.map((b) => (
@@ -67,15 +69,17 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
           <div className="sec-head reveal">
             <h2 id="related-title" className="sec-title">{t.pages.related}</h2>
           </div>
-          <div className="pgrid">
+          <div className="tilegrid">
             {related.map((c) => {
               const ri = t.products.items[c.index];
               return (
-                <Link href={`/products/${c.slug}`} className="pcard reveal" key={c.slug}>
-                  <span className="pcard__ico">{PRODUCT_ICON_BY_SLUG[c.slug]}</span>
-                  <h3 className="pcard__title">{ri.t}</h3>
-                  <p className="pcard__text">{ri.d}</p>
-                  <span className="pcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                <Link href={`/products/${c.slug}`} className="tile reveal" key={c.slug}>
+                  <img className="tile__img" src={CATEGORY_IMAGE[c.slug].src} alt="" loading="lazy" decoding="async" />
+                  <span className="tile__body">
+                    <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[c.slug]}</span>
+                    <span className="tile__title">{ri.t}</span>
+                    <span className="tile__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                  </span>
                 </Link>
               );
             })}

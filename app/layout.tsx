@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_Georgian } from "next/font/google";
+import { Mulish, Noto_Sans_Georgian } from "next/font/google";
 import { dictionaries } from "@/lib/dictionaries";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { SkipLink } from "@/components/SkipLink";
@@ -14,6 +14,16 @@ const notoGeorgian = Noto_Sans_Georgian({
   weight: ["400", "600", "700", "800", "900"],
   display: "swap",
   variable: "--font-noto-georgian",
+});
+
+/* Latin display/body face (close cousin of the reference's Proxima Nova).
+   Georgian glyphs are absent from Mulish, so Georgian text falls back to
+   Noto Sans Georgian via the CSS font stack. */
+const mulish = Mulish({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-mulish",
 });
 
 const ka = dictionaries.ka;
@@ -66,7 +76,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0B1626" },
+    { media: "(prefers-color-scheme: dark)", color: "#0A1C38" },
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
   ],
 };
@@ -86,7 +96,7 @@ const jsonLd = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ka" data-lang="ka" suppressHydrationWarning>
-      <body className={notoGeorgian.variable}>
+      <body className={`${mulish.variable} ${notoGeorgian.variable}`}>
         <LanguageProvider>
           <SkipLink />
           <TopBar />

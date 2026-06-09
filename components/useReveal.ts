@@ -15,6 +15,9 @@ export function useReveal(): void {
       els.forEach((e) => e.classList.add("is-visible"));
       return;
     }
+    /* Arm the hidden state only once JS is running, so no-JS visitors and
+       paused-transition renderers always see the content. */
+    document.documentElement.classList.add("js-reveal");
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
