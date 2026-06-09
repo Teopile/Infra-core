@@ -53,6 +53,7 @@ export interface Dict {
     required: string;
     consentErr: string;
     notConfigured: string;
+    emailErr: string;
   };
   footer: {
     tag: string;
@@ -63,6 +64,17 @@ export interface Dict {
     serviceLinks: string[];
     rights: string;
     built: string;
+    privacy: string;
+  };
+  pages: {
+    home: string;
+    included: string;
+    related: string;
+    aboutLead: string;
+    brandsLead: string;
+    cta: { title: string; text: string; button: string };
+    notFound: { code: string; title: string; text: string; cta: string };
+    privacy: { title: string; updated: string; intro: string; sections: { h: string; p: string }[] };
   };
   floats: { tg: string; wa: string };
 }
@@ -184,6 +196,7 @@ const ka: Dict = {
     consentErr: "გთხოვთ, დაეთანხმოთ მონაცემთა დამუშავებას.",
     notConfigured:
       "ფორმა ჯერ არ არის კონფიგურირებული (იხ. README). სანაცვლოდ მოგვწერეთ: info@infracore-consulting.com",
+    emailErr: "გთხოვთ, შეიყვანოთ სწორი ელ. ფოსტა.",
   },
   footer: {
     tag: "ერთი მომწოდებელი მთელი ოფისისთვის — ტექნიკა, ქსელი, ლიცენზიები და მხარდაჭერა.",
@@ -194,6 +207,49 @@ const ka: Dict = {
     serviceLinks: ["ოფიციალური გარანტია", "მიწოდება და მონტაჟი", "კონსულტაცია და მხარდაჭერა", "IT ინფრასტრუქტურა"],
     rights: "ყველა უფლება დაცულია.",
     built: "საქართველო · B2B IT გადაწყვეტილებები",
+    privacy: "კონფიდენციალურობა",
+  },
+  pages: {
+    home: "მთავარი",
+    included: "რას მოიცავს",
+    related: "სხვა კატეგორიები",
+    aboutLead: "ერთი მომწოდებელი მთელი ოფისისთვის — კონსულტაციიდან მონტაჟამდე და გარანტიამდე.",
+    brandsLead: "ბრენდები, რომელთა პროდუქციასაც ვაწვდით.",
+    cta: {
+      title: "მზად ხართ ოფისის აღსაჭურვად?",
+      text: "მოგვწერეთ და მიიღეთ შეთავაზება — დაგიკავშირდებით უმოკლეს დროში.",
+      button: "მოითხოვე შეთავაზება",
+    },
+    notFound: {
+      code: "404",
+      title: "გვერდი ვერ მოიძებნა",
+      text: "შესაძლოა გვერდი გადატანილია ან აღარ არსებობს.",
+      cta: "მთავარ გვერდზე დაბრუნება",
+    },
+    privacy: {
+      title: "კონფიდენციალურობის პოლიტიკა",
+      updated: "განახლდა: 2026",
+      intro:
+        "ეს გვერდი განმარტავს, რა მონაცემებს ვაგროვებთ საკონტაქტო ფორმის მეშვეობით და როგორ ვიყენებთ მათ.",
+      sections: [
+        {
+          h: "რა მონაცემებს ვაგროვებთ",
+          p: "მხოლოდ იმ მონაცემებს, რომელსაც თქვენ თავად შეიყვანთ ფორმაში: სახელი, კომპანია, ტელეფონი, ელ. ფოსტა, საქმიანობის სფერო და შეტყობინება.",
+        },
+        {
+          h: "რატომ ვიყენებთ",
+          p: "მხოლოდ თქვენს მოთხოვნაზე პასუხის გასაცემად და შეთავაზების მოსამზადებლად. მარკეტინგული მიზნებისთვის მონაცემებს თქვენი თანხმობის გარეშე არ ვიყენებთ.",
+        },
+        {
+          h: "გაზიარება",
+          p: "მონაცემებს არ ვუზიარებთ მესამე მხარეებს, გარდა ფორმის მიწოდების სერვისისა (Web3Forms), რომელიც თქვენს შეტყობინებას ჩვენამდე გადმოგზავნის.",
+        },
+        {
+          h: "თქვენი უფლებები",
+          p: "შეგიძლიათ მოითხოვოთ თქვენი მონაცემების ნახვა ან წაშლა — მოგვწერეთ: info@infracore-consulting.com",
+        },
+      ],
+    },
   },
   floats: {
     tg: "Telegram — ახალ ფანჯარაში იხსნება",
@@ -318,6 +374,7 @@ const en: Dict = {
     consentErr: "Please agree to the processing of your data.",
     notConfigured:
       "The form is not configured yet (see README). In the meantime, email us: info@infracore-consulting.com",
+    emailErr: "Please enter a valid email address.",
   },
   footer: {
     tag: "One supplier for the whole office — hardware, networking, licensing and support.",
@@ -328,6 +385,49 @@ const en: Dict = {
     serviceLinks: ["Official warranty", "Delivery & deployment", "Consultation & support", "IT infrastructure"],
     rights: "All rights reserved.",
     built: "Georgia · B2B IT solutions",
+    privacy: "Privacy",
+  },
+  pages: {
+    home: "Home",
+    included: "What's included",
+    related: "Other categories",
+    aboutLead: "One supplier for the whole office — from consultation to deployment and warranty.",
+    brandsLead: "The brands whose products we supply.",
+    cta: {
+      title: "Ready to equip your office?",
+      text: "Get in touch and receive a quote — we'll get back to you shortly.",
+      button: "Request a quote",
+    },
+    notFound: {
+      code: "404",
+      title: "Page not found",
+      text: "This page may have moved or no longer exists.",
+      cta: "Back to home",
+    },
+    privacy: {
+      title: "Privacy policy",
+      updated: "Updated: 2026",
+      intro:
+        "This page explains what data we collect through the contact form and how we use it.",
+      sections: [
+        {
+          h: "What we collect",
+          p: "Only the data you enter in the form yourself: name, company, phone, email, industry/sector and message.",
+        },
+        {
+          h: "Why we use it",
+          p: "Solely to respond to your inquiry and prepare a quote. We do not use your data for marketing without your consent.",
+        },
+        {
+          h: "Sharing",
+          p: "We do not share your data with third parties, except the form-delivery service (Web3Forms) that transmits your message to us.",
+        },
+        {
+          h: "Your rights",
+          p: "You can request access to or deletion of your data — email us: info@infracore-consulting.com",
+        },
+      ],
+    },
   },
   floats: {
     tg: "Telegram — opens in a new tab",

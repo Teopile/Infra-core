@@ -1,6 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_Georgian } from "next/font/google";
 import { dictionaries } from "@/lib/dictionaries";
+import { LanguageProvider } from "@/components/LanguageProvider";
+import { SkipLink } from "@/components/SkipLink";
+import { TopBar } from "@/components/TopBar";
+import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
+import { Floats } from "@/components/Floats";
 import "./globals.css";
 
 const notoGeorgian = Noto_Sans_Georgian({
@@ -15,7 +21,10 @@ const SITE_URL = "https://infracoregeorgia.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: ka.meta.title,
+  title: {
+    default: ka.meta.title,
+    template: "%s — Infra Core",
+  },
   description: ka.meta.description,
   applicationName: "Infra Core",
   alternates: { canonical: "/" },
@@ -78,7 +87,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ka" data-lang="ka" suppressHydrationWarning>
       <body className={notoGeorgian.variable}>
-        {children}
+        <LanguageProvider>
+          <SkipLink />
+          <TopBar />
+          <SiteHeader />
+          <main id="main" tabIndex={-1}>
+            {children}
+          </main>
+          <SiteFooter />
+          <Floats />
+        </LanguageProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
