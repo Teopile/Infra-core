@@ -109,9 +109,20 @@ export function ContactForm() {
           <input id="f-email" name="email" type="email" autoComplete="email" />
         </div>
       </div>
-      <div className="field">
-        <label htmlFor="f-sector">{t.form.sector}</label>
-        <input id="f-sector" name="sector" type="text" placeholder={t.form.sectorPh} />
+      <div className="qform__row">
+        <div className="field">
+          <label htmlFor="f-category">{t.form.category}</label>
+          <select id="f-category" name="category" defaultValue="">
+            <option value="">—</option>
+            {t.products.items.map((it) => (
+              <option value={it.t} key={it.t}>{it.t}</option>
+            ))}
+          </select>
+        </div>
+        <div className="field">
+          <label htmlFor="f-sector">{t.form.sector}</label>
+          <input id="f-sector" name="sector" type="text" placeholder={t.form.sectorPh} />
+        </div>
       </div>
       <div className="field">
         <label htmlFor="f-message">{t.form.message}</label>

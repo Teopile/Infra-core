@@ -43,6 +43,8 @@ export interface Dict {
     email: string;
     sector: string;
     sectorPh: string;
+    /** Quote-scoping dropdown label (options reuse products.items titles). */
+    category: string;
     message: string;
     messagePh: string;
     consent: string;
@@ -185,6 +187,7 @@ const ka: Dict = {
     email: "ელ. ფოსტა",
     sector: "საქმიანობის სფერო",
     sectorPh: "მაგ.: იურიდიული, რესტორანი/კვება, ვაჭრობა, კლინიკა…",
+    category: "პროდუქტის კატეგორია",
     message: "შეტყობინება",
     messagePh: "რამდენი სამუშაო ადგილი? რა გჭირდებათ?",
     consent: "თანახმა ვარ, ჩემი პერსონალური მონაცემები დამუშავდეს ამ მოთხოვნაზე პასუხის გასაცემად.",
@@ -363,6 +366,7 @@ const en: Dict = {
     email: "Email",
     sector: "Industry / sector",
     sectorPh: "e.g. legal, restaurant/food, retail, clinic…",
+    category: "Product category",
     message: "Message",
     messagePh: "How many workstations? What do you need?",
     consent: "I consent to the processing of my personal data in order to respond to this inquiry.",

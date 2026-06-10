@@ -1144,7 +1144,8 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   padding: 12px 13px;
   border: 1px solid #76828f; /* >=3:1 non-text contrast on white */
@@ -1155,11 +1156,14 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
   transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
 }
 
+.field select { min-height: 49px; }
+
 .field input::placeholder,
 .field textarea::placeholder { color: #5d6773; }
 
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
   border-color: var(--ink);
   box-shadow: 0 0 0 1px var(--ink);
