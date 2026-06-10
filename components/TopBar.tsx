@@ -1,8 +1,8 @@
 "use client";
 
 import { useLang } from "./LanguageProvider";
-import { icoMail, icoPhone } from "./icons";
-import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { icoMail, icoPhone, icoWa } from "./icons";
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, WA_CONFIGURED, waHref } from "@/lib/site";
 
 /**
  * Coal utility strip, sticky above the header. Contacts are mono
@@ -15,6 +15,9 @@ export function TopBar() {
       <div className="container topbar__inner">
         <div className="topbar__contacts">
           <a href={PHONE_HREF} className="topbar__link">{icoPhone}{PHONE_DISPLAY}</a>
+          {WA_CONFIGURED ? (
+            <a href={waHref(lang)} className="topbar__link" target="_blank" rel="noopener" aria-label={t.floats.wa}>{icoWa}WhatsApp</a>
+          ) : null}
           <a href={EMAIL_HREF} className="topbar__link">{icoMail}{EMAIL}</a>
           <span className="topbar__note">{t.footer.built}</span>
         </div>

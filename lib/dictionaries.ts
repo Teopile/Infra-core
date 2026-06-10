@@ -35,7 +35,15 @@ export interface Dict {
   why: { eyebrow: string; title: string; items: Item[] };
   vendors: { eyebrow: string; title: string; brands: string[]; note: string };
   process: { eyebrow: string; title: string; steps: Item[] };
-  contact: { eyebrow: string; title: string; lead: string; city: string };
+  contact: {
+    eyebrow: string;
+    title: string;
+    lead: string;
+    city: string;
+    /** Instant-channel button labels (stakeholder-requested channels). */
+    instantWa: string;
+    instantFb: string;
+  };
   form: {
     name: string;
     company: string;
@@ -179,6 +187,8 @@ const ka: Dict = {
     title: "გვითხარით, რა სჭირდება თქვენს ოფისს",
     lead: "შეავსეთ ფორმა და მიიღეთ შეთავაზება — დაგიკავშირდებით უმოკლეს დროში.",
     city: "საქართველო",
+    instantWa: "მოგვწერეთ WhatsApp-ში",
+    instantFb: "მოგვწერეთ Facebook-ზე",
   },
   form: {
     name: "სახელი *",
@@ -358,6 +368,8 @@ const en: Dict = {
     title: "Tell us what your office needs",
     lead: "Fill in the form and get a quote — we'll get back to you shortly.",
     city: "Georgia",
+    instantWa: "Message us on WhatsApp",
+    instantFb: "Message us on Facebook",
   },
   form: {
     name: "Name *",

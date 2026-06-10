@@ -1,7 +1,7 @@
 "use client";
 
 import { useLang } from "./LanguageProvider";
-import { TG_CONFIGURED, TG_URL, WA_CONFIGURED, WA_URL } from "@/lib/site";
+import { TG_CONFIGURED, TG_URL, WA_CONFIGURED, waHref } from "@/lib/site";
 
 /**
  * Fixed Telegram + WhatsApp quick-contact buttons (hidden on small screens
@@ -19,7 +19,7 @@ export function Floats() {
         </a>
       ) : null}
       {WA_CONFIGURED ? (
-        <a className="float float--wa" href={WA_URL} target="_blank" rel="noopener" aria-label={t.floats.wa}>
+        <a className="float float--wa" href={waHref(lang)} target="_blank" rel="noopener" aria-label={t.floats.wa}>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.4A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.5-4.1-.1-.2-1.1-1.4-1.1-2.6 0-1.2.6-1.8.9-2.1.2-.2.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2 0 .4-.1.5l-.4.5c-.2.2-.3.3-.1.6.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.2.1.4.1.6-.1l.7-.9c.2-.2.4-.2.6-.1l1.8.9c.3.1.4.2.4.5 0 .1 0 .5-.1.9z" /></svg>
         </a>
       ) : null}

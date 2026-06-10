@@ -4,11 +4,11 @@ import { useLang } from "@/components/LanguageProvider";
 import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
-import { TRUST_ICONS, icoMail, icoPhone, icoPin } from "@/components/icons";
-import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { TRUST_ICONS, icoMail, icoPhone, icoPin, icoWa } from "@/components/icons";
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, WA_CONFIGURED, waHref } from "@/lib/site";
 
 export function ContactView() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   useReveal();
 
   return (
@@ -27,6 +27,13 @@ export function ContactView() {
               <li>{icoMail}<a href={EMAIL_HREF} className="mono">{EMAIL}</a></li>
               <li>{icoPin}<span>{t.contact.city}</span></li>
             </ul>
+            {WA_CONFIGURED ? (
+              <div className="channels">
+                <a className="btn btn--outline" href={waHref(lang)} target="_blank" rel="noopener">
+                  {icoWa}{t.contact.instantWa}
+                </a>
+              </div>
+            ) : null}
             <ul className="contact__facts">
               {t.hero.trust.map((label, i) => (
                 <li key={label}>
