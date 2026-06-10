@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { preload } from "react-dom";
 import heroImage from "@/public/assets/hero/commerce-workspace@2x.webp";
 import { useLang } from "@/components/LanguageProvider";
 import { useReveal } from "@/components/useReveal";
@@ -19,6 +20,10 @@ import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 export default function Home() {
   const { t } = useLang();
   useReveal();
+
+  /* The hero photo is the LCP but loads via a CSS background; preload gets
+     the request started while the document is still parsing. */
+  preload(heroImage.src, { as: "image", fetchPriority: "high" });
 
   /* Both languages phrase the title as "everything … — delivered, set up,
      supported"; the part after the dash is the promise, so it gets the

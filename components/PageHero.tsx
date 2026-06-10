@@ -17,11 +17,11 @@ interface PageHeroProps {
 
 /** Compact subpage header with a breadcrumb, title and optional lead. */
 export function PageHero({ title, lead, trail = [] }: PageHeroProps) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   return (
     <section className="page-hero">
       <div className="container">
-        <nav className="breadcrumb" aria-label="Breadcrumb">
+        <nav className="breadcrumb" aria-label={lang === "ka" ? "ნავიგაციის ბილიკი" : "Breadcrumb"}>
           <ol>
             <li>
               <Link href="/">{t.pages.home}</Link>

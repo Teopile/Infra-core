@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect } from "react";
+import { useLang } from "./LanguageProvider";
 
 /**
  * Reveals `.reveal` elements as they scroll into view. Called by each page
- * view on mount so it re-binds after client-side navigation. Respects
- * prefers-reduced-motion and degrades gracefully without IntersectionObserver.
+ * view on mount so it re-binds after client-side navigation. Re-binds on
+ * language change too: translated-string keys remount the DOM nodes, and
+ * without re-observing they would stay at the hidden reveal state forever.
+ * Respects prefers-reduced-motion and degrades without IntersectionObserver.
  */
 export function useReveal(): void {
+  const { lang } = useLang();
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>(".reveal"));
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -31,5 +35,5 @@ export function useReveal(): void {
     );
     els.forEach((e) => io.observe(e));
     return () => io.disconnect();
-  }, []);
+  }, [lang]);
 }

@@ -25,19 +25,19 @@ export function SiteFooter() {
           <p className="footer__tag">{t.footer.tag}</p>
         </div>
         <div className="footer__col">
-          <h4>{t.footer.products}</h4>
+          <h2>{t.footer.products}</h2>
           {t.footer.productLinks.map((label, i) => (
             <Link href={PRODUCT_LINK_HREFS[i] ?? "/products"} key={label}>{label}</Link>
           ))}
         </div>
         <div className="footer__col">
-          <h4>{t.footer.services}</h4>
+          <h2>{t.footer.services}</h2>
           {t.footer.serviceLinks.map((label) => (
             <Link href="/services" key={label}>{label}</Link>
           ))}
         </div>
         <div className="footer__col">
-          <h4>{t.footer.contact}</h4>
+          <h2>{t.footer.contact}</h2>
           <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
           <a href={EMAIL_HREF}>{EMAIL}</a>
           <span className="footer__muted">{t.contact.city}</span>
@@ -46,7 +46,7 @@ export function SiteFooter() {
       </div>
       <div className="footer__bottom">
         <div className="container footer__bottominner">
-          <span>© 2026 Infra Core. <span>{t.footer.rights}</span></span>
+          <span suppressHydrationWarning>© {new Date().getFullYear()} Infra Core. <span>{t.footer.rights}</span></span>
           <span className="footer__muted">{t.footer.built}</span>
         </div>
       </div>

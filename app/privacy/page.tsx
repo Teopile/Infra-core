@@ -5,7 +5,12 @@ import { PrivacyView } from "./PrivacyView";
 export const metadata: Metadata = {
   title: dictionaries.ka.pages.privacy.title,
   description: dictionaries.ka.pages.privacy.intro,
-  alternates: { canonical: "/privacy" },
+  alternates: { canonical: "/privacy/" },
+  openGraph: {
+    url: "/privacy/",
+    title: dictionaries.ka.pages.privacy.title,
+    description: dictionaries.ka.pages.privacy.intro,
+  },
   robots: { index: true, follow: true },
 };
 

@@ -11,8 +11,10 @@ const STATIC_ROUTES = ["/", "/products", "/services", "/brands", "/about", "/con
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [...STATIC_ROUTES, ...productSlugs.map((s) => `/products/${s}`)];
+  const lastModified = new Date(); // build time = last content change for a static export
   return paths.map((path) => ({
     url: path === "/" ? `${BASE}/` : `${BASE}${path}/`,
+    lastModified,
     changeFrequency: "monthly",
     priority: path === "/" ? 1 : 0.7,
   }));

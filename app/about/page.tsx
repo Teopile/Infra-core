@@ -5,7 +5,12 @@ import { AboutView } from "./AboutView";
 export const metadata: Metadata = {
   title: dictionaries.ka.why.title,
   description: dictionaries.ka.pages.aboutLead,
-  alternates: { canonical: "/about" },
+  alternates: { canonical: "/about/" },
+  openGraph: {
+    url: "/about/",
+    title: dictionaries.ka.why.title,
+    description: dictionaries.ka.pages.aboutLead,
+  },
 };
 
 export default function AboutPage() {

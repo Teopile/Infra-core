@@ -4,7 +4,7 @@ import { useLang } from "@/components/LanguageProvider";
 import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { ContactForm } from "@/components/ContactForm";
-import { icoMail, icoPhone, icoPin } from "@/components/icons";
+import { TRUST_ICONS, icoMail, icoPhone, icoPin } from "@/components/icons";
 import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 export function ContactView() {
@@ -26,6 +26,14 @@ export function ContactView() {
               <li>{icoPhone}<a href={PHONE_HREF}>{PHONE_DISPLAY}</a></li>
               <li>{icoMail}<a href={EMAIL_HREF}>{EMAIL}</a></li>
               <li>{icoPin}<span>{t.contact.city}</span></li>
+            </ul>
+            <ul className="contact__ticks">
+              {t.hero.trust.map((label, i) => (
+                <li key={label}>
+                  <span className="ico" aria-hidden="true">{TRUST_ICONS[i]}</span>
+                  <span>{label}</span>
+                </li>
+              ))}
             </ul>
           </div>
           <ContactForm />

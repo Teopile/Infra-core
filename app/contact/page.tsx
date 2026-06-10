@@ -5,7 +5,12 @@ import { ContactView } from "./ContactView";
 export const metadata: Metadata = {
   title: dictionaries.ka.contact.title,
   description: dictionaries.ka.contact.lead,
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: "/contact/" },
+  openGraph: {
+    url: "/contact/",
+    title: dictionaries.ka.contact.title,
+    description: dictionaries.ka.contact.lead,
+  },
 };
 
 export default function ContactPage() {

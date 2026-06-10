@@ -39,7 +39,7 @@
   /* Layout */
   --maxw: 1240px;
   --gut: clamp(18px, 4vw, 44px);
-  --sec-y: clamp(58px, 7.4vw, 96px);
+  --sec-y: clamp(46px, 5.8vw, 76px);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* Z-scale (header sits above the drawer so the close toggle stays reachable) */
@@ -105,7 +105,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding-inline: var(--gut);
 }
 
-section[id], #top, #main { scroll-margin-top: 96px; }
+section[id], #main { scroll-margin-top: 96px; }
 
 .sr-only {
   position: absolute !important;
@@ -332,20 +332,21 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   min-height: 42px;
   display: inline-flex;
   align-items: center;
-  padding: 0 13px;
+  padding: 0 11px;
   color: var(--slate);
-  font-size: 0.95rem;
+  font-size: 0.93rem;
   font-weight: 700;
   line-height: 1.2;
+  white-space: nowrap;
   transition: color 0.2s var(--ease);
 }
 
 .nav__link::after {
   content: "";
   position: absolute;
-  left: 13px;
-  right: 13px;
-  bottom: 4px;
+  left: 11px;
+  right: 11px;
+  bottom: 3px;
   height: 2px;
   background: var(--blue);
   transform: scaleX(0);
@@ -355,8 +356,8 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 
 .nav__link:hover { color: var(--blue); }
 .nav__link:hover::after,
-.nav__link[aria-current="page"]::after { transform: scaleX(1); }
-.nav__link[aria-current="page"] { color: var(--blue); }
+.nav__link[aria-current]::after { transform: scaleX(1); }
+.nav__link[aria-current] { color: var(--blue); }
 
 .header__actions {
   display: flex;
@@ -399,15 +400,9 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 }
 
 .header__contact-txt strong {
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 800;
   white-space: nowrap;
-}
-
-.header__contact-txt small {
-  color: var(--muted);
-  font-size: 0.78rem;
-  font-weight: 600;
 }
 
 .navtoggle {
@@ -449,7 +444,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-block: clamp(56px, 8vw, 92px) 30px;
+  padding-block: clamp(44px, 6vw, 70px) 26px;
 }
 
 .hero__media,
@@ -478,7 +473,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 
 .hero__content {
   max-width: 780px;
-  padding-block: 8px 44px;
+  padding-block: 4px 36px;
 }
 
 .hero__kicker {
@@ -527,9 +522,19 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   flex-wrap: wrap;
   gap: 12px 26px;
   max-width: 780px;
-  margin-top: 30px;
-  padding-top: 22px;
+  margin-top: 24px;
+  padding-top: 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Trust icons are stroke-designed; without these rules they inherit
+   fill:currentColor and render as solid silhouettes. */
+.hero__trust .ico svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .hero__trust li {
@@ -626,7 +631,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
    ------------------------------------------------------------ */
 
 .section { padding-block: var(--sec-y); }
-.section--tight { padding-block: 38px; border-bottom: 1px solid var(--line-soft); }
+.section--tight { padding-block: 32px; border-bottom: 1px solid var(--line-soft); }
 .section--soft { background: var(--surface); border-block: 1px solid var(--line-soft); }
 .section--catalog { background: var(--paper); }
 .section--dark { background: var(--navy); color: var(--white); position: relative; overflow: hidden; }
@@ -648,7 +653,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 
 .sec-head {
   max-width: 880px;
-  margin: 0 0 36px;
+  margin: 0 0 28px;
   text-align: left;
 }
 
@@ -864,7 +869,8 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
 }
 
-.scard:hover {
+/* Hover affordance only where the card is actually a link. */
+.scard--link:hover {
   border-color: var(--blue);
   box-shadow: var(--shadow-md);
 }
@@ -931,12 +937,6 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   line-height: 1.7;
 }
 
-.why__note {
-  margin-top: 34px;
-  color: #c2d0e4;
-  text-align: left;
-}
-
 /* ------------------------------------------------------------
    Vendors / brand wordmarks
    ------------------------------------------------------------ */
@@ -949,24 +949,18 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 
 .vendor {
   display: inline-flex;
-  min-height: 76px;
-  min-width: 200px;
+  min-height: 88px;
+  min-width: 232px;
   align-items: center;
   justify-content: center;
-  padding: 14px 34px;
+  padding: 16px 44px;
   border: 1px solid var(--line);
   border-radius: var(--r);
   background: var(--paper);
   color: var(--slate);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 800;
   letter-spacing: 0.01em;
-  transition: border-color 0.2s var(--ease), color 0.2s var(--ease);
-}
-
-.vendor:hover {
-  border-color: var(--blue);
-  color: var(--blue);
 }
 
 .vendors__note {
@@ -991,8 +985,10 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   content: "";
   position: absolute;
   top: 24px;
-  left: 12%;
-  right: 12%;
+  /* Span from the center of circle 01 to the center of circle 03
+     (3 equal columns, 28px gaps, 48px circles). */
+  left: 24px;
+  right: calc((100% - 56px) / 3 - 24px);
   height: 2px;
   background: var(--blue-line);
 }
@@ -1034,8 +1030,6 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   align-items: start;
 }
 
-.contact .sec-head { margin: 0; }
-
 .contact__list {
   display: flex;
   flex-direction: column;
@@ -1064,6 +1058,39 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 }
 
 .contact__list a:hover { color: #7fb1f0; }
+
+/* Trust reassurance row that balances the form column on /contact */
+.contact__ticks {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.contact__ticks li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: #ccd9ec;
+  font-size: 0.97rem;
+  font-weight: 600;
+}
+
+.contact__ticks .ico {
+  width: 19px;
+  height: 19px;
+  color: #7fb1f0;
+}
+
+.contact__ticks .ico svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
 .qform {
   padding: 32px;
@@ -1096,7 +1123,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 .field textarea {
   width: 100%;
   padding: 12px 13px;
-  border: 1px solid #c6cdd6;
+  border: 1px solid #8c97a4;
   border-radius: var(--r-sm);
   background: var(--white);
   color: var(--ink);
@@ -1148,6 +1175,8 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   flex: none;
 }
 
+.consent:has(input[aria-invalid="true"]) { color: var(--danger); }
+
 .qform__submit { width: 100%; }
 
 .qform__status {
@@ -1167,8 +1196,9 @@ section[id], #top, #main { scroll-margin-top: 96px; }
 .footer {
   position: relative;
   overflow: hidden;
-  padding-top: 62px;
+  padding-top: 52px;
   background: var(--navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
   color: #b3c1d6;
 }
 
@@ -1199,14 +1229,17 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   font-size: 0.94rem;
 }
 
-.footer__col h4 {
+.footer__col h2 {
   margin-bottom: 15px;
   color: var(--white);
   font-size: 0.99rem;
 }
 
-.footer__col a,
-.footer__col span {
+/* Child combinator + :not(.brand) keep these link styles off the brand
+   lockup and its nested spans, which they were shattering into stacked
+   link-sized rows. */
+.footer__col > a:not(.brand),
+.footer__col > span {
   display: block;
   padding: 5px 0;
   color: #b3c1d6;
@@ -1214,7 +1247,7 @@ section[id], #top, #main { scroll-margin-top: 96px; }
   transition: color 0.2s var(--ease);
 }
 
-.footer__col a:hover { color: var(--white); }
+.footer__col > a:not(.brand):hover { color: var(--white); }
 .footer__muted { color: #8595ad !important; }
 
 .footer__bottom {
@@ -1300,8 +1333,14 @@ html.js-reveal .reveal.is-visible {
   .btn,
   .tile__img,
   .tile,
+  .tile__badge,
+  .tile__more em,
+  .brandcard__img,
+  .brandcard__more em,
+  .sec-head__link em,
+  .header__contact-ico,
+  .langswitch__btn,
   .scard,
-  .vendor,
   .float,
   .skip-link,
   .header,
@@ -1340,7 +1379,7 @@ body.nav-open { overflow: hidden; }
 .page-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(34px, 5.6vw, 58px) 0 clamp(28px, 4.4vw, 44px);
+  padding: clamp(28px, 4.4vw, 46px) 0 clamp(24px, 3.6vw, 38px);
   background: var(--surface);
   border-bottom: 1px solid var(--line-soft);
 }
@@ -1563,8 +1602,9 @@ body.nav-open { overflow: hidden; }
 .notfound__text { max-width: 48ch; color: var(--muted); }
 .notfound .btn { margin-top: 12px; }
 
-/* CTA band */
-.cta-band { position: relative; overflow: hidden; }
+/* CTA band: slightly lighter navy than the footer so the two planes read
+   as separate surfaces instead of fusing. */
+.cta-band { position: relative; overflow: hidden; background: var(--navy-2); }
 
 .cta-band__inner {
   position: relative;
@@ -1584,6 +1624,12 @@ body.nav-open { overflow: hidden; }
 /* ------------------------------------------------------------
    Responsive
    ------------------------------------------------------------ */
+
+/* Between the drawer breakpoint and ~1320px the Georgian nav needs the
+   room: show the phone as icon-only. */
+@media (max-width: 1320px) {
+  .header__contact-txt { display: none; }
+}
 
 @media (max-width: 1200px) {
   .nav {
@@ -1605,7 +1651,7 @@ body.nav-open { overflow: hidden; }
   .nav.is-open { display: flex; }
   .nav__link { min-height: 48px; padding-inline: 16px; font-size: 1rem; }
   .nav__link::after { display: none; }
-  .nav__link[aria-current="page"] { background: var(--blue-tint); border-radius: var(--r-sm); }
+  .nav__link[aria-current] { background: var(--blue-tint); border-radius: var(--r-sm); }
   .navtoggle { display: inline-flex; }
   .header__cta { display: none; }
   .header__contact-txt { display: none; }
@@ -1620,7 +1666,8 @@ body.nav-open { overflow: hidden; }
 }
 
 @media (max-width: 920px) {
-  .hero { padding-block: 56px 24px; }
+  .topbar__note { display: none; }
+  .hero { padding-block: 48px 22px; }
   .hero__media { background-position: 62% center; }
   .hero__shade {
     background:

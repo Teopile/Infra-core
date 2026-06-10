@@ -6,25 +6,26 @@ import { useEffect, useRef, useState } from "react";
 import { Brand } from "./Brand";
 import { useLang } from "./LanguageProvider";
 import { icoPhone } from "./icons";
-import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 const MOBILE_BREAKPOINT = 1200;
 
 /** Sticky site header with responsive nav drawer, scrim, focus management. */
 export function SiteHeader() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const toggleRef = useRef<HTMLButtonElement | null>(null);
 
+  /* "How we work" lives on /about#process; keeping it out of the header nav
+     keeps the row on one line in Georgian at desktop widths. */
   const navItems = [
     { href: "/products", label: t.nav.products },
     { href: "/services", label: t.nav.services },
     { href: "/about", label: t.nav.why },
     { href: "/brands", label: t.nav.vendors },
-    { href: "/about#process", label: t.nav.process },
     { href: "/contact", label: t.nav.contact },
   ];
 
@@ -41,13 +42,26 @@ export function SiteHeader() {
     setNavOpen(false);
   }, [pathname]);
 
-  /* Body lock + inert offscreen drawer + Escape to close. */
+  /* Body lock + inert offscreen drawer + Escape to close. While the drawer
+     is open, the page regions behind the scrim go inert so Tab cannot reach
+     content that is visually hidden underneath (focus containment). */
   useEffect(() => {
     const nav = navRef.current;
     if (nav) {
       if (navOpen) nav.removeAttribute("inert");
       else if (window.innerWidth <= MOBILE_BREAKPOINT) nav.setAttribute("inert", "");
     }
+    const pageRegions = [
+      document.getElementById("main"),
+      document.querySelector("footer"),
+      document.querySelector(".topbar"),
+      document.querySelector(".floats"),
+    ];
+    pageRegions.forEach((el) => {
+      if (!el) return;
+      if (navOpen) el.setAttribute("inert", "");
+      else el.removeAttribute("inert");
+    });
     document.body.classList.toggle("nav-open", navOpen);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && navOpen) {
@@ -77,9 +91,14 @@ export function SiteHeader() {
   }, [navOpen]);
 
   const closeNav = () => setNavOpen(false);
-  const isActive = (href: string) => {
-    if (href.includes("#")) return false; // hash links never mark the current page
-    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  /* Exact match -> the current page; prefix match (e.g. /products/computers
+     under /products) -> current section. Both get the active style. */
+  const currentState = (href: string): "page" | "true" | undefined => {
+    const path = pathname.replace(/\/$/, "") || "/";
+    const target = href.replace(/\/$/, "") || "/";
+    if (path === target) return "page";
+    if (target !== "/" && path.startsWith(`${target}/`)) return "true";
+    return undefined;
   };
 
   return (
@@ -87,13 +106,13 @@ export function SiteHeader() {
       <header className={`header${scrolled ? " is-scrolled" : ""}`} id="header">
         <div className="container header__inner">
           <Brand />
-          <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav" aria-label="Main navigation" ref={navRef}>
+          <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav" aria-label={lang === "ka" ? "მთავარი ნავიგაცია" : "Main navigation"} ref={navRef}>
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className="nav__link"
-                aria-current={isActive(item.href) ? "page" : undefined}
+                aria-current={currentState(item.href)}
                 onClick={closeNav}
               >
                 {item.label}
@@ -105,11 +124,10 @@ export function SiteHeader() {
               <span className="header__contact-ico" aria-hidden="true">{icoPhone}</span>
               <span className="header__contact-txt">
                 <strong>{PHONE_DISPLAY}</strong>
-                <small>{EMAIL}</small>
               </span>
             </a>
             <Link href="/contact" className="btn btn--primary btn--sm header__cta">{t.nav.quote}</Link>
-            <button type="button" className="navtoggle" ref={toggleRef} aria-label="Menu" aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>
+            <button type="button" className="navtoggle" ref={toggleRef} aria-label={lang === "ka" ? "მენიუ" : "Menu"} aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>
               <span /><span /><span />
             </button>
           </div>

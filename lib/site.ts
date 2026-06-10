@@ -12,3 +12,8 @@ export const EMAIL = "info@infracore-consulting.com";
 export const WA_URL = `https://wa.me/${WA_NUMBER}`;
 export const PHONE_HREF = `tel:${PHONE_TEL}`;
 export const EMAIL_HREF = `mailto:${EMAIL}`;
+
+/* True only when the real value is configured; UI hides dead placeholder
+   buttons (e.g. a Telegram link that points at bare t.me) until then. */
+export const TG_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_TELEGRAM_URL);
+export const WA_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER);

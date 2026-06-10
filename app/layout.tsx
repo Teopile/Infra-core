@@ -28,6 +28,9 @@ const mulish = Mulish({
 
 const ka = dictionaries.ka;
 const SITE_URL = "https://infracoregeorgia.com";
+/* GitHub Pages serves the site under /Infra-core; path-based assets must
+   carry the prefix there (static imports handle their own). */
+const BP = process.env.DEPLOY_TARGET === "pages" ? "/Infra-core" : "";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -38,14 +41,14 @@ export const metadata: Metadata = {
   description: ka.meta.description,
   applicationName: "Infra Core",
   alternates: { canonical: "/" },
-  manifest: "/site.webmanifest",
+  manifest: `${BP}/site.webmanifest`,
   icons: {
     icon: [
       {
         url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1626'/%3E%3Cpath d='M16 6l8 4.6v9.2L16 24l-8-4.2v-9.2L16 6z' fill='none' stroke='%232E90FA' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='15' r='2.4' fill='%2322C3E6'/%3E%3C/svg%3E",
       },
     ],
-    apple: "/assets/icons/apple-touch-icon.png",
+    apple: `${BP}/assets/icons/apple-touch-icon.png`,
   },
   openGraph: {
     type: "website",
@@ -57,7 +60,7 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     images: [
       {
-        url: "/assets/og/og-cover.png",
+        url: `${BP}/assets/og/og-cover.png`,
         width: 1200,
         height: 630,
         alt: "Infra Core — სრული IT გადაწყვეტილებები ბიზნესისთვის",
@@ -68,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: ka.meta.title,
     description: "ერთი მომწოდებელი მთელი ოფისისთვის — ტექნიკა, ქსელი, ლიცენზიები და მხარდაჭერა.",
-    images: ["/assets/og/og-cover.png"],
+    images: [`${BP}/assets/og/og-cover.png`],
   },
 };
 
@@ -88,6 +91,8 @@ const jsonLd = {
   description: "B2B IT solutions and office-equipment reseller in Georgia.",
   url: `${SITE_URL}/`,
   email: "info@infracore-consulting.com",
+  // Real number flows in from the env once configured; omitted until then.
+  ...(process.env.NEXT_PUBLIC_PHONE_TEL ? { telephone: process.env.NEXT_PUBLIC_PHONE_TEL } : {}),
   image: `${SITE_URL}/assets/og/og-cover.png`,
   address: { "@type": "PostalAddress", addressCountry: "GE" },
   areaServed: "GE",

@@ -33,10 +33,6 @@ export const icoMail = (
 export const icoPin = (
   <svg className="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a8 8 0 0 0-8 8c0 5.4 8 12 8 12s8-6.6 8-12a8 8 0 0 0-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" /></svg>
 );
-export const icoArrow = (
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
-);
-
 /* Section icon arrays — index-aligned with dictionary item order. */
 export const SERVICE_ICONS = [icoShieldCheck, icoTruck, icoSupport, icoServer];
 export const WHAT_ICONS = [icoMonitor, icoShieldCheck, icoCheck, icoBolt];

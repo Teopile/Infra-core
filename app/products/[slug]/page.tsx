@@ -18,7 +18,12 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   return {
     title: item.t,
     description: item.d,
-    alternates: { canonical: `/products/${cat.slug}` },
+    alternates: { canonical: `/products/${cat.slug}/` },
+    openGraph: {
+      url: `/products/${cat.slug}/`,
+      title: item.t,
+      description: item.d,
+    },
   };
 }
 

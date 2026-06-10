@@ -1,19 +1,14 @@
-"use client";
+import type { Metadata } from "next";
+import { dictionaries } from "@/lib/dictionaries";
+import { NotFoundView } from "./NotFoundView";
 
-import Link from "next/link";
-import { useLang } from "@/components/LanguageProvider";
+// Served as 404.html in the static export: keep it out of indexes and give
+// it its own title instead of inheriting the homepage metadata.
+export const metadata: Metadata = {
+  title: dictionaries.ka.pages.notFound.title,
+  robots: { index: false, follow: false },
+};
 
 export default function NotFound() {
-  const { t } = useLang();
-  const nf = t.pages.notFound;
-  return (
-    <section className="section notfound">
-      <div className="container notfound__inner">
-        <span className="notfound__code" aria-hidden="true">{nf.code}</span>
-        <h1 className="notfound__title">{nf.title}</h1>
-        <p className="notfound__text">{nf.text}</p>
-        <Link href="/" className="btn btn--primary btn--lg">{nf.cta}</Link>
-      </div>
-    </section>
-  );
+  return <NotFoundView />;
 }

@@ -23,11 +23,13 @@ export function ProductsView() {
       <section className="section">
         <div className="container">
           <div className="tilegrid">
-            {productCategories.map((cat) => {
+            {productCategories.map((cat, i) => {
               const item = t.products.items[cat.index];
               return (
                 <Link href={`/products/${cat.slug}`} className="tile reveal" key={cat.slug}>
-                  <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading="lazy" decoding="async" />
+                  {/* First row is above the fold: eager-load it so the LCP
+                      image is not gated behind lazy loading. */}
+                  <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading={i < 3 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : undefined} decoding="async" />
                   <div className="tile__body">
                     <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
                     <h2 className="tile__title">{item.t}</h2>

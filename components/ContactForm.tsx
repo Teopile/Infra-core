@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent } from "react";
 import { useLang } from "./LanguageProvider";
-import { EMAIL, WEB3_KEY } from "@/lib/site";
+import { WEB3_KEY } from "@/lib/site";
 
 type Status = { text: string; kind: "" | "ok" | "err" };
 
