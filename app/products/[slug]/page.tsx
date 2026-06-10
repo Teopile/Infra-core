@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { dictionaries } from "@/lib/dictionaries";
+import { OG_IMAGE } from "@/lib/site";
 import { getCategory, productSlugs } from "@/lib/catalog";
 import { ProductDetailView } from "./ProductDetailView";
 
@@ -23,6 +24,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       url: `/products/${cat.slug}/`,
       title: item.t,
       description: item.d,
+      images: [OG_IMAGE],
     },
   };
 }

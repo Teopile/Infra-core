@@ -17,3 +17,9 @@ export const EMAIL_HREF = `mailto:${EMAIL}`;
    buttons (e.g. a Telegram link that points at bare t.me) until then. */
 export const TG_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_TELEGRAM_URL);
 export const WA_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER);
+
+/* Share image for per-page openGraph blocks. Next replaces a parent's
+   openGraph wholesale when a page defines its own, so pages must restate
+   the image. DEPLOY_TARGET is build-time-only (server metadata path). */
+const BP = process.env.DEPLOY_TARGET === "pages" ? "/Infra-core" : "";
+export const OG_IMAGE = `${BP}/assets/og/og-cover.png`;

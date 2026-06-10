@@ -14,7 +14,7 @@ Infra Core is a B2B IT supplier in Georgia: computers, networking, printers, Jab
 
 ## Brand Personality
 
-Established, procurement-grade, direct. The site should feel like a national IT distributor (reference: noventiq.ge), not a startup landing page: real product photography, a prominent phone number, dense but ordered commerce layout, deep corporate blue, generous white. Confidence comes from structure and specificity, not slogans.
+Established, procurement-grade, direct. The site carries its own identity (see DESIGN.md, "Industrial Requisition"): an ink-on-white precision catalog with a safety-orange action color and mono requisition details. It should feel like the supplier that ships pallets on time, not a startup landing page: real product photography, a prominent phone number, dense but ordered commerce layout. Confidence comes from structure and specificity, not slogans.
 
 ## Anti-references
 

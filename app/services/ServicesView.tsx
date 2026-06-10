@@ -5,9 +5,11 @@ import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
 import { SERVICE_ICONS } from "@/components/icons";
+import { displayText } from "@/lib/georgian";
+import { nn } from "@/lib/format";
 
 export function ServicesView() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   useReveal();
 
   return (
@@ -20,29 +22,28 @@ export function ServicesView() {
 
       <section className="section">
         <div className="container">
-          <div className="sgrid">
+          <div className="svc">
             {t.services.items.map((it, i) => (
-              <div className="scard reveal" key={it.t}>
-                <span className="scard__ico">{SERVICE_ICONS[i]}</span>
-                <div>
-                  <h2 className="scard__title">{it.t}</h2>
-                  <p className="scard__text">{it.d}</p>
-                </div>
+              <div className="svc__row reveal" key={it.t}>
+                <span className="svc__ico">{SERVICE_ICONS[i]}</span>
+                <h2 className="svc__title">{it.t}</h2>
+                <p className="svc__text">{it.d}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section section--soft" aria-labelledby="proc-title">
+      <section className="section section--panel" aria-labelledby="proc-title">
         <div className="container">
-          <div className="sec-head reveal">
-            <h2 id="proc-title" className="sec-title">{t.process.title}</h2>
+          <div className="tb reveal">
+            <h2 id="proc-title" className="tb__title display">{displayText(lang, t.process.title)}</h2>
+            <span className="tb__meta">{nn(t.process.steps.length)}</span>
           </div>
           <div className="steps">
             {t.process.steps.map((it, i) => (
               <div className="step reveal" key={it.t}>
-                <span className="step__num">{String(i + 1).padStart(2, "0")}</span>
+                <span className="step__num" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="step__t">{it.t}</h3>
                 <p className="step__d">{it.d}</p>
               </div>

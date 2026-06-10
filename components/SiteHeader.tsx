@@ -8,19 +8,16 @@ import { useLang } from "./LanguageProvider";
 import { icoPhone } from "./icons";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
-const MOBILE_BREAKPOINT = 1200;
+const MOBILE_BREAKPOINT = 1180;
 
-/** Sticky site header with responsive nav drawer, scrim, focus management. */
+/** Sticky paper header on its ink rule, with the drawer + focus containment. */
 export function SiteHeader() {
   const { t, lang } = useLang();
   const pathname = usePathname();
   const [navOpen, setNavOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const navRef = useRef<HTMLElement | null>(null);
   const toggleRef = useRef<HTMLButtonElement | null>(null);
 
-  /* "How we work" lives on /about#process; keeping it out of the header nav
-     keeps the row on one line in Georgian at desktop widths. */
   const navItems = [
     { href: "/products", label: t.nav.products },
     { href: "/services", label: t.nav.services },
@@ -29,22 +26,13 @@ export function SiteHeader() {
     { href: "/contact", label: t.nav.contact },
   ];
 
-  /* Sticky header shadow on scroll. */
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   /* Close the drawer whenever the route changes. */
   useEffect(() => {
     setNavOpen(false);
   }, [pathname]);
 
-  /* Body lock + inert offscreen drawer + Escape to close. While the drawer
-     is open, the page regions behind the scrim go inert so Tab cannot reach
-     content that is visually hidden underneath (focus containment). */
+  /* Body lock + inert offscreen drawer + Escape to close. While open, the
+     page regions behind the scrim go inert (focus containment). */
   useEffect(() => {
     const nav = navRef.current;
     if (nav) {
@@ -56,6 +44,7 @@ export function SiteHeader() {
       document.querySelector("footer"),
       document.querySelector(".topbar"),
       document.querySelector(".floats"),
+      document.querySelector(".quotebar"),
     ];
     pageRegions.forEach((el) => {
       if (!el) return;
@@ -63,6 +52,9 @@ export function SiteHeader() {
       else el.removeAttribute("inert");
     });
     document.body.classList.toggle("nav-open", navOpen);
+    /* Move focus into the drawer so Tab continues through its links
+       instead of exiting the page (the toggle sits after the nav in DOM). */
+    if (navOpen) nav?.querySelector("a")?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && navOpen) {
         setNavOpen(false);
@@ -91,8 +83,8 @@ export function SiteHeader() {
   }, [navOpen]);
 
   const closeNav = () => setNavOpen(false);
-  /* Exact match -> the current page; prefix match (e.g. /products/computers
-     under /products) -> current section. Both get the active style. */
+
+  /* Exact match -> current page; prefix match -> current section. */
   const currentState = (href: string): "page" | "true" | undefined => {
     const path = pathname.replace(/\/$/, "") || "/";
     const target = href.replace(/\/$/, "") || "/";
@@ -103,7 +95,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className={`header${scrolled ? " is-scrolled" : ""}`} id="header">
+      <header className="header" id="header">
         <div className="container header__inner">
           <Brand />
           <nav className={`nav${navOpen ? " is-open" : ""}`} id="nav" aria-label={lang === "ka" ? "მთავარი ნავიგაცია" : "Main navigation"} ref={navRef}>
@@ -120,11 +112,9 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header__actions">
-            <a href={PHONE_HREF} className="header__contact" aria-label={PHONE_DISPLAY}>
-              <span className="header__contact-ico" aria-hidden="true">{icoPhone}</span>
-              <span className="header__contact-txt">
-                <strong>{PHONE_DISPLAY}</strong>
-              </span>
+            <a href={PHONE_HREF} className="header__phone" aria-label={PHONE_DISPLAY}>
+              {icoPhone}
+              <span>{PHONE_DISPLAY}</span>
             </a>
             <Link href="/contact" className="btn btn--primary btn--sm header__cta">{t.nav.quote}</Link>
             <button type="button" className="navtoggle" ref={toggleRef} aria-label={lang === "ka" ? "მენიუ" : "Menu"} aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>

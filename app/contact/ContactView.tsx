@@ -19,15 +19,15 @@ export function ContactView() {
         trail={[{ label: t.nav.contact }]}
       />
 
-      <section className="section section--dark" id="contact">
+      <section className="section" id="contact">
         <div className="container contact">
-          <div className="contact__intro reveal">
+          <div className="reveal">
             <ul className="contact__list">
-              <li>{icoPhone}<a href={PHONE_HREF}>{PHONE_DISPLAY}</a></li>
-              <li>{icoMail}<a href={EMAIL_HREF}>{EMAIL}</a></li>
+              <li>{icoPhone}<a href={PHONE_HREF} className="mono">{PHONE_DISPLAY}</a></li>
+              <li>{icoMail}<a href={EMAIL_HREF} className="mono">{EMAIL}</a></li>
               <li>{icoPin}<span>{t.contact.city}</span></li>
             </ul>
-            <ul className="contact__ticks">
+            <ul className="contact__facts">
               {t.hero.trust.map((label, i) => (
                 <li key={label}>
                   <span className="ico" aria-hidden="true">{TRUST_ICONS[i]}</span>
@@ -36,7 +36,11 @@ export function ContactView() {
               ))}
             </ul>
           </div>
-          <ContactForm />
+          <div className="reveal">
+            <div className="regmarks">
+              <ContactForm />
+            </div>
+          </div>
         </div>
       </section>
     </>

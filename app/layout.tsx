@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Mulish, Noto_Sans_Georgian } from "next/font/google";
+import { Archivo, IBM_Plex_Mono, Noto_Sans_Georgian } from "next/font/google";
 import { dictionaries } from "@/lib/dictionaries";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { SkipLink } from "@/components/SkipLink";
@@ -7,23 +7,32 @@ import { TopBar } from "@/components/TopBar";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Floats } from "@/components/Floats";
+import { QuoteBar } from "@/components/QuoteBar";
 import "./globals.css";
 
 const notoGeorgian = Noto_Sans_Georgian({
   subsets: ["georgian", "latin"],
-  weight: ["400", "600", "700", "800", "900"],
+  weight: ["400", "600", "700", "800"],
   display: "swap",
   variable: "--font-noto-georgian",
 });
 
-/* Latin display/body face (close cousin of the reference's Proxima Nova).
-   Georgian glyphs are absent from Mulish, so Georgian text falls back to
-   Noto Sans Georgian via the CSS font stack. */
-const mulish = Mulish({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "600", "700", "800"],
+/* Latin display voice: variable Archivo carries the width axis the
+   "Industrial Requisition" display tier uses (en headings, brand lockup). */
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: "variable",
+  axes: ["wdth"],
   display: "swap",
-  variable: "--font-mulish",
+  variable: "--font-archivo",
+});
+
+/* Requisition voice: Latin/digit-only by design policy (see DESIGN.md). */
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  display: "swap",
+  variable: "--font-mono",
 });
 
 const ka = dictionaries.ka;
@@ -45,7 +54,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1626'/%3E%3Cpath d='M16 6l8 4.6v9.2L16 24l-8-4.2v-9.2L16 6z' fill='none' stroke='%232E90FA' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='15' r='2.4' fill='%2322C3E6'/%3E%3C/svg%3E",
+        // Brand mark: orange registration square on coal.
+        url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101216'/%3E%3Crect x='10' y='10' width='12' height='12' fill='%23E04E10'/%3E%3C/svg%3E",
       },
     ],
     apple: `${BP}/assets/icons/apple-touch-icon.png`,
@@ -79,7 +89,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0A1C38" },
+    { media: "(prefers-color-scheme: dark)", color: "#101216" },
     { media: "(prefers-color-scheme: light)", color: "#ffffff" },
   ],
 };
@@ -99,9 +109,12 @@ const jsonLd = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  /* Font variable classes MUST live on <html>: the --f-* aliases in
+     globals.css are declared on :root, and var() substitution happens where
+     a custom property is declared, not where it is used. */
   return (
-    <html lang="ka" data-lang="ka" suppressHydrationWarning>
-      <body className={`${mulish.variable} ${notoGeorgian.variable}`}>
+    <html lang="ka" data-lang="ka" className={`${archivo.variable} ${plexMono.variable} ${notoGeorgian.variable}`} suppressHydrationWarning>
+      <body>
         <LanguageProvider>
           <SkipLink />
           <TopBar />
@@ -111,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
           <SiteFooter />
           <Floats />
+          <QuoteBar />
         </LanguageProvider>
         <script
           type="application/ld+json"

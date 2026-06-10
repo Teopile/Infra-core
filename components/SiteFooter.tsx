@@ -5,8 +5,7 @@ import { Brand } from "./Brand";
 import { useLang } from "./LanguageProvider";
 import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
-// Footer product links are index-aligned with dictionaries footer.productLinks:
-// [Computers & Mini PC, Networking, Printers, Software & licensing].
+// Footer product links are index-aligned with dictionaries footer.productLinks.
 const PRODUCT_LINK_HREFS = [
   "/products/computers",
   "/products/networking",
@@ -18,7 +17,6 @@ export function SiteFooter() {
   const { t } = useLang();
   return (
     <footer className="footer">
-      <div className="footer__bg" aria-hidden="true" />
       <div className="container footer__inner">
         <div className="footer__col footer__brandcol">
           <Brand light />
@@ -38,8 +36,8 @@ export function SiteFooter() {
         </div>
         <div className="footer__col">
           <h2>{t.footer.contact}</h2>
-          <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
-          <a href={EMAIL_HREF}>{EMAIL}</a>
+          <a href={PHONE_HREF} className="mono">{PHONE_DISPLAY}</a>
+          <a href={EMAIL_HREF} className="mono">{EMAIL}</a>
           <span className="footer__muted">{t.contact.city}</span>
           <Link href="/privacy">{t.footer.privacy}</Link>
         </div>

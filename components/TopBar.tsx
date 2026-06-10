@@ -1,24 +1,26 @@
 "use client";
 
 import { useLang } from "./LanguageProvider";
-import { icoMail, icoPin } from "./icons";
-import { EMAIL, EMAIL_HREF } from "@/lib/site";
+import { icoMail, icoPhone } from "./icons";
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
-/** Slim light utility bar: location + email on the left, language switch on the right. */
+/**
+ * Coal utility strip, sticky above the header. Contacts are mono
+ * (Latin/digits); the locale note is body-voice; language switch right.
+ */
 export function TopBar() {
   const { lang, setLang, t } = useLang();
   return (
     <div className="topbar">
       <div className="container topbar__inner">
         <div className="topbar__contacts">
-          <span className="topbar__note">{icoPin}{t.footer.built}</span>
+          <a href={PHONE_HREF} className="topbar__link">{icoPhone}{PHONE_DISPLAY}</a>
           <a href={EMAIL_HREF} className="topbar__link">{icoMail}{EMAIL}</a>
+          <span className="topbar__note">{t.footer.built}</span>
         </div>
-        <div className="topbar__right">
-          <div className="langswitch" role="group" aria-label="Language / ენა">
-            <button type="button" className={`langswitch__btn${lang === "ka" ? " is-active" : ""}`} aria-pressed={lang === "ka"} lang="ka" onClick={() => setLang("ka")}>ქარ</button>
-            <button type="button" className={`langswitch__btn${lang === "en" ? " is-active" : ""}`} aria-pressed={lang === "en"} lang="en" onClick={() => setLang("en")}>EN</button>
-          </div>
+        <div className="langswitch" role="group" aria-label="Language / ენა">
+          <button type="button" className={`langswitch__btn${lang === "ka" ? " is-active" : ""}`} aria-pressed={lang === "ka"} lang="ka" onClick={() => setLang("ka")}>KA</button>
+          <button type="button" className={`langswitch__btn${lang === "en" ? " is-active" : ""}`} aria-pressed={lang === "en"} lang="en" onClick={() => setLang("en")}>EN</button>
         </div>
       </div>
     </div>

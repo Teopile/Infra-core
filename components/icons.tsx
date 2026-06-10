@@ -9,11 +9,6 @@ const svg = (children: ReactNode) => (
 );
 
 export const icoMonitor = svg(<><rect x="3" y="4" width="18" height="12" rx="1.5" /><path d="M8 20h8M12 16v4" /></>);
-export const icoMonitorAcc = svg(<><rect x="2.5" y="4" width="19" height="12" rx="1.5" /><path d="M8 20h8M12 16v4M7 9h6" /></>);
-export const icoNetwork = svg(<><rect x="3" y="14" width="18" height="6" rx="1.5" /><path d="M7 17h.01M11 17h.01M12 14V8a4 4 0 0 1 4-4M12 8a4 4 0 0 0-4-4" /></>);
-export const icoPrinter = svg(<path d="M7 9V4h10v5M7 18H5a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-2M7 14h10v6H7z" />);
-export const icoHeadset = svg(<path d="M4 13v-1a8 8 0 0 1 16 0v1M4 13h2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM20 13h-2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1zM17 19a3 3 0 0 1-3 3h-2" />);
-export const icoSoftware = svg(<path d="M4 5h16v11H4zM2 20h20M9.5 9.5l2 2 3-3" />);
 export const icoShieldCheck = svg(<><path d="M12 3l8 4v5c0 4.5-3.4 7.8-8 9-4.6-1.2-8-4.5-8-9V7l8-4z" /><path d="m9 12 2 2 4-4" /></>);
 export const icoTruck = svg(<path d="M3 13h11V6H3zM14 9h3l3 3v4h-6zM7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />);
 export const icoSupport = svg(<path d="M4 13v-1a8 8 0 0 1 16 0v1M4 13h2a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1zM20 13h-2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1a1 1 0 0 0 1-1z" />);
@@ -39,7 +34,7 @@ export const WHAT_ICONS = [icoMonitor, icoShieldCheck, icoCheck, icoBolt];
 export const WHY_ICONS = [icoBox, icoTag, icoCheckCircle];
 export const TRUST_ICONS = [icoShieldCheck, icoTruck, icoTag];
 
-/* Product-category icons keyed by catalog slug. */
+/* Catalog slug union (consumed by lib/catalog.ts and lib/categoryImages.ts). */
 export type ProductSlug =
   | "computers"
   | "monitors"
@@ -47,12 +42,3 @@ export type ProductSlug =
   | "printers"
   | "headsets"
   | "software";
-
-export const PRODUCT_ICON_BY_SLUG: Record<ProductSlug, ReactNode> = {
-  computers: icoMonitor,
-  monitors: icoMonitorAcc,
-  networking: icoNetwork,
-  printers: icoPrinter,
-  headsets: icoHeadset,
-  software: icoSoftware,
-};

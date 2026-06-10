@@ -30,7 +30,7 @@ export function BrandsView() {
                 <Link href={`/products/${b.slug}`} className="brandcard reveal" key={b.name}>
                   <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} alt="" loading="lazy" decoding="async" />
                   <div className="brandcard__body">
-                    <h2 className="brandcard__name" lang="en">{b.name}</h2>
+                    <h2 className="brandcard__name">{b.name}</h2>
                     {item ? <span className="brandcard__text">{item.d}</span> : null}
                     <span className="brandcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
                   </div>

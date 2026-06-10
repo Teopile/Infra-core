@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { dictionaries } from "@/lib/dictionaries";
+import { OG_IMAGE } from "@/lib/site";
 import { PrivacyView } from "./PrivacyView";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     url: "/privacy/",
     title: dictionaries.ka.pages.privacy.title,
     description: dictionaries.ka.pages.privacy.intro,
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
 };

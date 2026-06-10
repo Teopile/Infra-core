@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { dictionaries } from "@/lib/dictionaries";
+import { OG_IMAGE } from "@/lib/site";
 import { BrandsView } from "./BrandsView";
 
 export const metadata: Metadata = {
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     url: "/brands/",
     title: dictionaries.ka.vendors.title,
     description: dictionaries.ka.pages.brandsLead,
+    images: [OG_IMAGE],
   },
 };
 

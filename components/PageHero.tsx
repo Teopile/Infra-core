@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLang } from "./LanguageProvider";
+import { displayText } from "@/lib/georgian";
 
 export interface Crumb {
   label: string;
@@ -15,11 +17,17 @@ interface PageHeroProps {
   trail?: Crumb[];
 }
 
-/** Compact subpage header with a breadcrumb, title and optional lead. */
+/**
+ * Subpage title block: breadcrumb, display-tier h1, and the page's real
+ * route stamped in mono on the ink rule (requisition voice, Latin-only).
+ */
 export function PageHero({ title, lead, trail = [] }: PageHeroProps) {
   const { t, lang } = useLang();
+  const pathname = usePathname();
+  const route = (pathname.replace(/\/+$/, "") || "/").toLowerCase();
+
   return (
-    <section className="page-hero">
+    <section className="phero">
       <div className="container">
         <nav className="breadcrumb" aria-label={lang === "ka" ? "ნავიგაციის ბილიკი" : "Breadcrumb"}>
           <ol>
@@ -41,8 +49,11 @@ export function PageHero({ title, lead, trail = [] }: PageHeroProps) {
             })}
           </ol>
         </nav>
-        <h1 className="page-hero__title">{title}</h1>
-        {lead ? <p className="page-hero__lead">{lead}</p> : null}
+        <div className="phero__row">
+          <h1 className="phero__title display">{displayText(lang, title)}</h1>
+          <span className="phero__route" aria-hidden="true">{route}</span>
+        </div>
+        {lead ? <p className="phero__lead">{lead}</p> : null}
       </div>
     </section>
   );

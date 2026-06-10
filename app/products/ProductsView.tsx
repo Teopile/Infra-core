@@ -5,7 +5,6 @@ import { useLang } from "@/components/LanguageProvider";
 import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
-import { PRODUCT_ICON_BY_SLUG } from "@/components/icons";
 import { productCategories } from "@/lib/catalog";
 import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 
@@ -22,18 +21,23 @@ export function ProductsView() {
       />
       <section className="section">
         <div className="container">
-          <div className="tilegrid">
+          <div className="cgrid">
             {productCategories.map((cat, i) => {
               const item = t.products.items[cat.index];
               return (
-                <Link href={`/products/${cat.slug}`} className="tile reveal" key={cat.slug}>
-                  {/* First row is above the fold: eager-load it so the LCP
-                      image is not gated behind lazy loading. */}
-                  <img className="tile__img" src={CATEGORY_IMAGE[cat.slug].src} alt="" loading={i < 3 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : undefined} decoding="async" />
-                  <div className="tile__body">
-                    <span className="tile__badge" aria-hidden="true">{PRODUCT_ICON_BY_SLUG[cat.slug]}</span>
-                    <h2 className="tile__title">{item.t}</h2>
-                    <span className="tile__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                <Link href={`/products/${cat.slug}`} className="ccard reveal" key={cat.slug}>
+                  <span className="ccard__media">
+                    <img
+                      src={CATEGORY_IMAGE[cat.slug].src}
+                      alt=""
+                      loading={i < 3 ? "eager" : "lazy"}
+                      fetchPriority={i === 0 ? "high" : undefined}
+                      decoding="async"
+                    />
+                  </span>
+                  <div className="ccard__body">
+                    <h2 className="ccard__title">{item.t}</h2>
+                    <span className="ccard__arrow" aria-hidden="true">→</span>
                   </div>
                 </Link>
               );
