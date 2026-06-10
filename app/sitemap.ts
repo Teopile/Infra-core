@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { productSlugs } from "@/lib/catalog";
+import { serviceSlugs } from "@/lib/serviceCatalog";
 
 export const dynamic = "force-static";
 
@@ -10,7 +11,11 @@ const BASE = "https://infracoregeorgia.com";
 const STATIC_ROUTES = ["/", "/products", "/services", "/brands", "/about", "/contact", "/privacy"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [...STATIC_ROUTES, ...productSlugs.map((s) => `/products/${s}`)];
+  const paths = [
+    ...STATIC_ROUTES,
+    ...productSlugs.map((s) => `/products/${s}`),
+    ...serviceSlugs.map((s) => `/services/${s}`),
+  ];
   const lastModified = new Date(); // build time = last content change for a static export
   return paths.map((path) => ({
     url: path === "/" ? `${BASE}/` : `${BASE}${path}/`,

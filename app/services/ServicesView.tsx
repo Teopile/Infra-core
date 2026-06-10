@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { useLang } from "@/components/LanguageProvider";
+import { servicePageByIndex } from "@/lib/serviceCatalog";
 import { useReveal } from "@/components/useReveal";
 import { PageHero } from "@/components/PageHero";
 import { CtaBand } from "@/components/CtaBand";
@@ -23,13 +25,21 @@ export function ServicesView() {
       <section className="section">
         <div className="container">
           <div className="svc">
-            {t.services.items.map((it, i) => (
-              <div className="svc__row reveal" key={it.t}>
-                <span className="svc__ico">{SERVICE_ICONS[i]}</span>
-                <h2 className="svc__title">{it.t}</h2>
-                <p className="svc__text">{it.d}</p>
-              </div>
-            ))}
+            {t.services.items.map((it, i) => {
+              const slug = servicePageByIndex[i];
+              const inner = (
+                <>
+                  <span className="svc__ico">{SERVICE_ICONS[i]}</span>
+                  <h2 className="svc__title">{it.t}</h2>
+                  <p className="svc__text">{it.d}</p>
+                </>
+              );
+              return slug ? (
+                <Link href={`/services/${slug}`} className="svc__row reveal" key={it.t}>{inner}</Link>
+              ) : (
+                <div className="svc__row reveal" key={it.t}>{inner}</div>
+              );
+            })}
           </div>
         </div>
       </section>
