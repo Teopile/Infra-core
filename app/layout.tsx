@@ -53,10 +53,8 @@ export const metadata: Metadata = {
   manifest: `${BP}/site.webmanifest`,
   icons: {
     icon: [
-      {
-        // Brand mark: orange registration square on coal.
-        url: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23101216'/%3E%3Crect x='10' y='10' width='12' height='12' fill='%23E04E10'/%3E%3C/svg%3E",
-      },
+      { url: `${BP}/favicon.ico`, sizes: "32x32" },
+      { url: `${BP}/assets/brand/logo-icon.svg`, type: "image/svg+xml" },
     ],
     apple: `${BP}/assets/icons/apple-touch-icon.png`,
   },
@@ -88,10 +86,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#101216" },
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-  ],
+  themeColor: "#0B6854",
 };
 
 const jsonLd = {

@@ -12,16 +12,22 @@
   --ink-2: #2a2d35;
   --coal: #101216;
   --coal-2: #191c22;
-  --accent: #e04e10;        /* marks, rules, large graphics only */
-  --accent-text: #b53e0a;   /* text-bearing orange: 5.7:1 on white */
-  --accent-deep: #93340a;
+  /* Brand greens (from the InfraCore logo). brand-400 and lighter are
+     decoration/dark-bg only — they fail WCAG as text on white. */
+  --brand-900: #0b6854;
+  --brand-700: #309076;
+  --brand-400: #6eb39f;
+  --brand-200: #bce0d7;
+  --brand-50: #e2fbf7;
+  --accent: var(--brand-400);      /* decorative marks, rules, large graphics */
+  --accent-text: var(--brand-700); /* links, icons, active states */
   --muted: #555a64;
   --coal-muted: #aab0bb;
   --panel: #f4f5f6;
   --hairline: #e3e4e8;
   --hairline-2: #c9ccd2;
   --hairline-dark: rgba(255, 255, 255, 0.16);
-  --ok: #1b7a4e;
+  --ok: #0b6854;
   --danger: #b42318;
 
   /* Type voices (language-scoped heading stack set below) */
@@ -99,7 +105,7 @@ button, input, textarea { font: inherit; }
 button { cursor: pointer; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 
-::selection { background: var(--ink); color: var(--paper); }
+::selection { background: var(--brand-900); color: var(--paper); }
 
 /* Requisition voice — Latin/digits only by policy. */
 .mono {
@@ -143,9 +149,10 @@ section[id], #main { scroll-margin-top: 132px; }
 
 .skip-link:focus { top: 12px; }
 
-/* Focus: ink ring on light, white on dark. Never orange. */
+/* Focus: brand-700 ring on light surfaces, white on dark (brand greens
+   lack contrast on coal). */
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--brand-700);
   outline-offset: 2px;
 }
 
@@ -204,8 +211,8 @@ section[id], #main { scroll-margin-top: 132px; }
 .btn--sm { --bh: 40px; padding-inline: 18px; font-size: 0.9rem; }
 .btn--lg { --bh: 54px; padding-inline: 30px; font-size: 1rem; }
 
-.btn--primary { background: var(--accent-text); color: #fff; }
-.btn--primary:hover { background: var(--accent-deep); }
+.btn--primary { background: var(--brand-900); color: #fff; }
+.btn--primary:hover { background: var(--brand-700); }
 
 .btn--coal { background: var(--paper); color: var(--ink); }
 .btn--coal:hover { background: var(--panel); }
@@ -328,22 +335,27 @@ section[id], #main { scroll-margin-top: 132px; }
 }
 
 .brand__mark {
-  width: 14px;
-  height: 14px;
-  background: var(--accent);
+  width: 36px;
+  height: 36px;
   flex: none;
 }
 
+.brand__mark svg { width: 100%; height: 100%; }
+
 .brand__text {
   font-family: var(--font-archivo), "Archivo", sans-serif;
-  font-stretch: 122%;
+  font-stretch: 110%;
   font-weight: 800;
-  font-size: 1.22rem;
-  letter-spacing: 0.01em;
-  text-transform: uppercase;
+  font-size: 1.28rem;
+  letter-spacing: 0.005em;
 }
 
-.brand--light { color: var(--paper); }
+/* Logo lockup colors (logotype: exempt from text-contrast rules). */
+.brand__infra { color: var(--brand-900); }
+.brand__core { color: var(--brand-400); font-weight: 700; }
+
+.brand--light .brand__infra { color: var(--paper); }
+.brand--light .brand__core { color: var(--brand-400); }
 
 .nav { display: flex; align-items: center; }
 
@@ -490,7 +502,7 @@ html[data-lang="ka"] .hero__title {
   line-height: 1.16;
 }
 
-.hero__title-accent { color: #ff7038; }
+.hero__title-accent { color: var(--brand-400); }
 
 .hero__sub {
   max-width: 58ch;
@@ -621,7 +633,7 @@ html[data-lang="ka"] .hero__title {
 
 .manifest__result {
   justify-self: end;
-  color: var(--accent-text);
+  color: var(--brand-900); /* body-size text on white needs the 900 step */
   font-size: 0.93rem;
   font-weight: 800;
   line-height: 1.35;
@@ -816,7 +828,7 @@ html[data-lang="ka"] .tb__title { font-size: clamp(1.3rem, 2.3vw, 1.85rem); }
 }
 
 a.svc__row { transition: background 0.2s var(--ease); }
-a.svc__row:hover { background: var(--panel); }
+a.svc__row:hover { background: var(--brand-50); }
 
 .svc__ico {
   display: inline-flex;
@@ -952,7 +964,7 @@ a.svc__row:hover { background: var(--panel); }
   align-items: baseline;
   gap: 8px;
   margin-top: 4px;
-  color: #ffc1a1;
+  color: var(--brand-200);
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -1476,7 +1488,7 @@ html[data-lang="ka"] .phero__title { font-size: clamp(1.45rem, 3.2vw, 2.15rem); 
   font-weight: 600;
   font-size: clamp(4rem, 14vw, 8rem);
   line-height: 1;
-  color: var(--accent);
+  color: var(--brand-700); /* brand-400 is too faint on white at any size */
 }
 
 .nf__title { font-size: clamp(1.5rem, 4vw, 2.3rem); }

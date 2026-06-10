@@ -10,9 +10,11 @@ export, no backend; the quote form posts to Web3Forms.
   `lib/dictionaries.ts` (ka + en). Never invent, reword, or add claims,
   products, prices, or partners. UI chrome labels (aria-labels) may be
   bilingual ternaries in components.
-- **Design contract:** `DESIGN.md` ("Industrial Requisition"). Tokens and
-  component grammar live in `app/globals.css`. Orange `--accent` is for
-  marks/rules only; text-bearing orange is `--accent-text` (AA on white).
+- **Design contract:** `DESIGN.md` ("Industrial Requisition") with the
+  InfraCore brand greens (logo-derived: brand-900 #0B6854 … brand-50).
+  Tokens live in `app/globals.css`. brand-400 and lighter are decoration
+  or dark-background only — they fail WCAG as text on white; text-bearing
+  green is brand-900/700.
   Mono (`.mono`, IBM Plex Mono) is Latin/digits only — never Georgian.
   Display tier (`.display`) renders Mtavruli capitals in Georgian.
 - **Static export constraints:** `output: "export"`, `trailingSlash: true`,

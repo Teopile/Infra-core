@@ -13,9 +13,12 @@ trust 4/10, slop 4/10, typography 4/10 on Rev A).
 | `--paper` | `#ffffff` | base surface |
 | `--ink` | `#16181d` | text, structural rules |
 | `--coal` | `#101216` | hero + footer ONLY (CTA band stays on paper) |
-| `--accent` | `#e04e10` | marks, rules, large graphics only (≥3:1 uses) |
-| `--accent-text` | `#b53e0a` | text-bearing orange: button fills, links (5.7:1 w/ white) |
-| `--accent-deep` | `#93340a` | pressed/hover on accent-text |
+| `--brand-900` | `#0b6854` | deep teal-green: primary buttons, strong text accents |
+| `--brand-700` | `#309076` | links, icons, active states, focus rings, button hover |
+| `--brand-400` | `#6eb39f` | decorative marks/rules + dark-bg accents (never text on white) |
+| `--brand-200` | `#bce0d7` | borders, subtle fills, light accents on coal |
+| `--brand-50` | `#e2fbf7` | lightest wash: hover tints |
+| `--accent` / `--accent-text` | aliases | map to brand-400 / brand-700 |
 | `--muted` | `#555a64` | secondary text on paper/panel (≥4.5:1) |
 | `--coal-muted` | `#aab0bb` | secondary text on coal (≥4.5:1) |
 | `--panel` | `#f4f5f6` | alternate band (chroma-0 cool) |
