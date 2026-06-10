@@ -69,6 +69,14 @@ export const productCategories: ProductCategory[] = [
 
 export const productSlugs: ProductSlug[] = productCategories.map((c) => c.slug);
 
+/* Brands the company supplies, each mapped to the catalog category whose
+   (already-approved) description represents it. Shared by the home vendors
+   band and the brands page. */
+export const suppliedBrands: { name: string; slug: ProductSlug }[] = [
+  { name: "Beelink", slug: "computers" },
+  { name: "Jabra", slug: "headsets" },
+];
+
 export function getCategory(slug: string): ProductCategory | undefined {
   return productCategories.find((c) => c.slug === slug);
 }

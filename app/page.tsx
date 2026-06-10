@@ -14,7 +14,7 @@ import {
   TRUST_ICONS,
   icoCheck,
 } from "@/components/icons";
-import { productCategories } from "@/lib/catalog";
+import { productCategories, suppliedBrands } from "@/lib/catalog";
 import { CATEGORY_IMAGE } from "@/lib/categoryImages";
 
 export default function Home() {
@@ -178,9 +178,15 @@ export default function Home() {
               {t.nav.vendors} <em aria-hidden="true">→</em>
             </Link>
           </div>
-          <div className="vendors reveal" role="list" lang="en">
-            {t.vendors.brands.map((b) => (
-              <span className="vendor" role="listitem" key={b}>{b}</span>
+          <div className="brandgrid reveal">
+            {suppliedBrands.map((b) => (
+              <Link href={`/products/${b.slug}`} className="brandcard brandcard--sm" key={b.name}>
+                <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} alt="" loading="lazy" decoding="async" />
+                <div className="brandcard__body">
+                  <h3 className="brandcard__name" lang="en">{b.name}</h3>
+                  <span className="brandcard__more">{t.products.more} <em aria-hidden="true">→</em></span>
+                </div>
+              </Link>
             ))}
           </div>
           <p className="vendors__note reveal">{t.vendors.note}</p>

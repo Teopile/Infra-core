@@ -105,7 +105,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding-inline: var(--gut);
 }
 
-section[id], #main { scroll-margin-top: 96px; }
+section[id], #main { scroll-margin-top: 130px; }
 
 .sr-only {
   position: absolute !important;
@@ -205,6 +205,9 @@ section[id], #main { scroll-margin-top: 96px; }
    ------------------------------------------------------------ */
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
   background: var(--surface);
   border-bottom: 1px solid var(--line-soft);
   color: var(--muted);
@@ -283,7 +286,7 @@ section[id], #main { scroll-margin-top: 96px; }
 
 .header {
   position: sticky;
-  top: 0;
+  top: 38px; /* sits under the equally sticky 38px topbar */
   z-index: var(--z-header);
   background: var(--white);
   border-bottom: 1px solid var(--line-soft);
@@ -938,30 +941,8 @@ section[id], #main { scroll-margin-top: 96px; }
 }
 
 /* ------------------------------------------------------------
-   Vendors / brand wordmarks
+   Vendors note (brand cards themselves use .brandcard)
    ------------------------------------------------------------ */
-
-.vendors {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-
-.vendor {
-  display: inline-flex;
-  min-height: 88px;
-  min-width: 232px;
-  align-items: center;
-  justify-content: center;
-  padding: 16px 44px;
-  border: 1px solid var(--line);
-  border-radius: var(--r);
-  background: var(--paper);
-  color: var(--slate);
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: 0.01em;
-}
 
 .vendors__note {
   max-width: 70ch;
@@ -1568,6 +1549,11 @@ body.nav-open { overflow: hidden; }
 .brandcard__more em { font-style: normal; transition: transform 0.18s var(--ease); }
 .brandcard:hover .brandcard__more em { transform: translateX(4px); }
 
+/* Compact variant for the home vendors band */
+.brandcard--sm { min-height: 150px; }
+.brandcard--sm .brandcard__body { padding: 18px 20px; gap: 3px; }
+.brandcard--sm .brandcard__name { font-size: 1.3rem; }
+
 /* Prose (privacy) */
 .prose {
   max-width: 760px;
@@ -1642,7 +1628,7 @@ body.nav-open { overflow: hidden; }
     flex-direction: column;
     align-items: stretch;
     gap: 4px;
-    padding: 96px 20px 28px;
+    padding: 110px 20px 28px;
     border-left: 1px solid var(--line);
     background: var(--paper);
     box-shadow: var(--shadow-dark);
@@ -1708,8 +1694,6 @@ body.nav-open { overflow: hidden; }
   .tilegrid { grid-template-columns: 1fr; }
   .tile { aspect-ratio: 16 / 10; }
   .sgrid { grid-template-columns: 1fr; }
-  .vendors { flex-direction: column; }
-  .vendor { width: 100%; }
   .brandgrid { grid-template-columns: 1fr; }
   .qform { padding: 22px; }
   .qform__row { grid-template-columns: 1fr; gap: 0; }
