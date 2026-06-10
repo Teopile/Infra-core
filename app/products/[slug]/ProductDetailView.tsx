@@ -48,6 +48,16 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
                 </li>
               ))}
             </ul>
+            {cat.brands && cat.brands.length > 0 ? (
+              <>
+                <h2 className="detail__h detail__h--brands">{t.nav.vendors}</h2>
+                <ul className="brandrow" lang="en">
+                  {cat.brands.map((b) => (
+                    <li key={b} className="mono">{b}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
           </div>
 
           <aside className="detail__aside reveal">

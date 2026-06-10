@@ -14,6 +14,10 @@ export interface ProductCategory {
   /** Index into dictionaries[lang].products.items (the source of title + description). */
   index: number;
   bullets: Record<Lang, string[]>;
+  /** Supplier-confirmed brand names (Latin), populated category-by-category
+   *  as the owner delivers lists. Absent/empty = the row renders nothing —
+   *  never a "coming soon" placeholder. */
+  brands?: string[];
 }
 
 export const productCategories: ProductCategory[] = [
