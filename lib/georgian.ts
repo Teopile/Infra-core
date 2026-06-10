@@ -8,9 +8,13 @@ import type { Lang } from "./dictionaries";
 const MTAVRULI_OFFSET = 0x1c90 - 0x10d0;
 
 export function toMtavruli(text: string): string {
-  return text.replace(/[ა-ჺჽ-ჿ]/g, (ch) =>
-    String.fromCharCode(ch.charCodeAt(0) + MTAVRULI_OFFSET)
-  );
+  return text
+    .replace(/[ა-ჺჽ-ჿ]/g, (ch) =>
+      String.fromCharCode(ch.charCodeAt(0) + MTAVRULI_OFFSET)
+    )
+    /* Latin fragments uppercase here too: the ka display tier disables CSS
+       text-transform (Chromium maps Mtavruli BACK to Mkhedruli under it). */
+    .replace(/[a-z]+/g, (s) => s.toUpperCase());
 }
 
 /** Display-tier text: Mtavruli capitals in Georgian, untouched otherwise. */

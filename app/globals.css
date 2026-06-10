@@ -98,6 +98,12 @@ h1, h2, h3, h4 {
 .display { text-transform: uppercase; letter-spacing: 0.01em; }
 html[data-lang="en"] .display { font-stretch: 115%; letter-spacing: 0.005em; }
 
+/* Chromium case-maps Mtavruli codepoints BACK to Mkhedruli under
+   text-transform:uppercase, silently undoing the JS transform — so the
+   Georgian display tier must not use CSS casing at all (lib/georgian.ts
+   supplies Mtavruli + uppercased Latin in the DOM). */
+html[data-lang="ka"] .display { text-transform: none; }
+
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
@@ -303,7 +309,7 @@ section[id], #main { scroll-margin-top: 132px; }
 .langswitch__btn:hover { color: var(--paper); }
 
 .langswitch__btn.is-active {
-  background: var(--accent-text);
+  background: var(--brand-900); /* white label at 12.5px needs >=4.5:1 */
   color: #fff;
 }
 
@@ -691,7 +697,7 @@ html[data-lang="ka"] .tb__title { font-size: clamp(1.3rem, 2.3vw, 1.85rem); }
   align-items: baseline;
   gap: 8px;
   padding-bottom: 4px;
-  color: var(--accent-text);
+  color: var(--brand-900); /* small text: brand-700 is 3.91:1, below AA */
   font-size: 0.92rem;
   font-weight: 700;
   white-space: nowrap;
@@ -1089,7 +1095,7 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 }
 
 .contact__list a.mono { font-size: 0.97rem; }
-.contact__list a:hover { color: var(--accent-text); }
+.contact__list a:hover { color: var(--brand-900); }
 
 .contact__facts { margin-top: 22px; display: flex; flex-direction: column; gap: 11px; }
 
@@ -1328,7 +1334,7 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
   min-height: 52px;
   align-items: center;
   justify-content: center;
-  background: var(--accent-text);
+  background: var(--brand-900); /* white label at 15.5px needs >=4.5:1 */
   color: #fff;
   font-size: 0.97rem;
   font-weight: 700;
@@ -1367,7 +1373,7 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 
 .breadcrumb li { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
 .breadcrumb a { color: var(--muted); transition: color 0.2s var(--ease); }
-.breadcrumb a:hover { color: var(--accent-text); }
+.breadcrumb a:hover { color: var(--brand-900); }
 .breadcrumb [aria-current="page"] { color: var(--ink); font-weight: 700; }
 .breadcrumb__sep { color: var(--hairline-2); }
 
@@ -1592,7 +1598,7 @@ body.nav-open { overflow: hidden; }
   }
 
   .nav__link::after { display: none; }
-  .nav__link[aria-current] { color: var(--accent-text); }
+  .nav__link[aria-current] { color: var(--brand-900); }
   .navtoggle { display: inline-flex; }
   .header__cta { display: none; }
   .vstrip { grid-template-columns: repeat(2, 1fr); }
