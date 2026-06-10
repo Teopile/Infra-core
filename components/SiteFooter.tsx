@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { Brand } from "./Brand";
 import { useLang } from "./LanguageProvider";
-import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { icoFb, icoLi } from "./icons";
+import { EMAIL, EMAIL_HREF, FB_CONFIGURED, FB_URL, LI_CONFIGURED, LI_URL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 // Footer product links are index-aligned with dictionaries footer.productLinks.
 const PRODUCT_LINK_HREFS = [
@@ -21,6 +22,16 @@ export function SiteFooter() {
         <div className="footer__col footer__brandcol">
           <Brand light />
           <p className="footer__tag">{t.footer.tag}</p>
+          {FB_CONFIGURED || LI_CONFIGURED ? (
+            <div className="footer__social">
+              {FB_CONFIGURED ? (
+                <a href={FB_URL} target="_blank" rel="noopener" aria-label="Facebook">{icoFb}</a>
+              ) : null}
+              {LI_CONFIGURED ? (
+                <a href={LI_URL} target="_blank" rel="noopener" aria-label="LinkedIn">{icoLi}</a>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div className="footer__col">
           <h2>{t.footer.products}</h2>

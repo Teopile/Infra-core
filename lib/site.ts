@@ -13,6 +13,16 @@ export const EMAIL = "info@infracore-consulting.com";
 
 export const WA_URL = `https://wa.me/${WA_NUMBER}`;
 
+/* Social channels — render-nothing-until-configured, like WA/TG. FB uses a
+   page slug so both the page link and the m.me messaging link derive from
+   one value. */
+export const FB_PAGE = process.env.NEXT_PUBLIC_FACEBOOK_PAGE || "";
+export const FB_CONFIGURED = Boolean(FB_PAGE);
+export const FB_URL = `https://facebook.com/${FB_PAGE}`;
+export const FB_MSG_URL = `https://m.me/${FB_PAGE}`;
+export const LI_URL = process.env.NEXT_PUBLIC_LINKEDIN_URL || "";
+export const LI_CONFIGURED = Boolean(LI_URL);
+
 /* Locale-matched WhatsApp deep link with the stakeholder-approved prefill. */
 const WA_PREFILL: Record<Lang, string> = {
   ka: "გამარჯობა, თქვენი საიტიდან გწერთ — ",
