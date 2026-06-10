@@ -116,7 +116,9 @@ export function SiteHeader() {
             <a href={EMAIL_HREF} className="nav__contact mono">{icoMail}{EMAIL}</a>
           </nav>
           <div className="header__actions">
-            <Link href="/contact" className="btn btn--primary btn--sm header__cta">{t.nav.quote}</Link>
+            {/* Outline by standing decision: the page body owns the single
+                primary CTA; the chrome supports it. */}
+            <Link href="/contact" className="btn btn--outline btn--sm header__cta">{t.nav.quote}</Link>
             <button type="button" className="navtoggle" ref={toggleRef} aria-label={lang === "ka" ? "მენიუ" : "Menu"} aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>
               <span /><span /><span />
             </button>

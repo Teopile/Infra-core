@@ -1064,6 +1064,25 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 .ctaband__text { margin-top: 10px; color: var(--muted); font-size: 1.02rem; }
 .ctaband .btn { flex: none; }
 
+/* Env-gated inline quote module (active once the form backend is live) */
+.ctaband__module { min-width: min(560px, 100%); }
+
+.ctaband__fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.ctaband__fields .field { margin-bottom: 0; }
+.ctaband__module .consent { margin: 12px 0 0; }
+.ctaband__module .qform__status { margin-top: 8px; }
+
+@media (max-width: 900px) {
+  .ctaband__fields { grid-template-columns: 1fr; }
+  .ctaband__module { width: 100%; }
+}
+
 /* ------------------------------------------------------------
    Contact + form
    ------------------------------------------------------------ */
