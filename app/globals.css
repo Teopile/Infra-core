@@ -249,6 +249,7 @@ section[id], #main { scroll-margin-top: 132px; }
 .topbar__inner {
   display: flex;
   min-height: var(--topbar-h);
+  padding-block: 6px; /* lands the bar at ~40px with the 28px lang switch */
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -320,7 +321,7 @@ section[id], #main { scroll-margin-top: 132px; }
 
 .header__inner {
   display: flex;
-  min-height: 76px;
+  min-height: 80px;
   align-items: center;
   justify-content: space-between;
   gap: 18px;
@@ -357,11 +358,11 @@ section[id], #main { scroll-margin-top: 132px; }
 .brand--light .brand__infra { color: var(--paper); }
 .brand--light .brand__core { color: var(--brand-400); }
 
-.nav { display: flex; align-items: center; }
+.nav { display: flex; align-items: center; gap: 4px; } /* 4px + 2x14px padding = 32px between labels */
 
 .nav__link {
   position: relative;
-  min-height: 74px;
+  min-height: 78px;
   display: inline-flex;
   align-items: center;
   padding: 0 14px;
@@ -397,20 +398,21 @@ section[id], #main { scroll-margin-top: 132px; }
   gap: 16px;
 }
 
-.header__phone {
-  display: inline-flex;
+/* Drawer-only contact links: the phone may never disappear, so when the
+   topbar contacts hide (<=640px) these appear inside the mobile menu. */
+.nav__contact {
+  display: none;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
+  min-height: 52px;
+  padding-inline: 12px;
   color: var(--ink);
-  font-family: var(--f-mono);
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
+  border-bottom: 1px solid var(--hairline);
 }
 
-.header__phone .ico { width: 15px; height: 15px; color: var(--accent-text); }
-.header__phone:hover { color: var(--accent-text); }
+.nav__contact .ico { width: 15px; height: 15px; color: var(--accent-text); }
 
 .navtoggle {
   display: none;
@@ -443,6 +445,11 @@ section[id], #main { scroll-margin-top: 132px; }
 
 .hero {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  /* One shared frame for text + image at every viewport (120px = topbar
+     40px + navbar 80px). */
+  min-height: clamp(560px, calc(100svh - 120px), 780px);
   background: var(--coal);
   color: var(--paper);
   overflow: hidden;
@@ -464,12 +471,16 @@ section[id], #main { scroll-margin-top: 132px; }
 
 .hero__inner {
   position: relative;
+  flex: 1 1 auto;
   display: grid;
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
   gap: clamp(28px, 4vw, 56px);
-  align-items: center;
-  padding-block: clamp(48px, 6.5vw, 84px) clamp(28px, 4vw, 48px);
+  align-items: stretch; /* the image column owns the full row height */
+  padding-block: 80px clamp(28px, 4vw, 48px);
 }
+
+/* Copy stays vertically centered inside the stretched row. */
+.hero__inner > :first-child { align-self: center; }
 
 .hero__intro {
   display: flex;
@@ -554,10 +565,10 @@ html[data-lang="ka"] .hero__title {
   stroke-linecap: square;
 }
 
+/* Wrapper fills its column; the img fills the wrapper. The corner
+   brackets (.regmarks) attach to this wrapper, so they hug the frame. */
 .hero__media {
   position: relative;
-  align-self: stretch;
-  min-height: 320px;
 }
 
 .hero__media img {
@@ -566,6 +577,7 @@ html[data-lang="ka"] .hero__title {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   filter: grayscale(0.35) contrast(1.04);
 }
 
@@ -1583,10 +1595,6 @@ body.nav-open { overflow: hidden; }
   .nav__link[aria-current] { color: var(--accent-text); }
   .navtoggle { display: inline-flex; }
   .header__cta { display: none; }
-  .hero__inner { grid-template-columns: 1fr; }
-  .hero__media { min-height: 240px; order: -1; }
-  .manifest { grid-template-columns: 1fr; gap: 12px; }
-  .manifest__result { justify-self: start; text-align: left; }
   .vstrip { grid-template-columns: repeat(2, 1fr); }
   .vstrip__item { padding: 22px 22px 22px 0; }
   .vstrip__item:nth-child(odd) { border-left: 0; padding-left: 0; }
@@ -1594,7 +1602,19 @@ body.nav-open { overflow: hidden; }
   .vstrip__item:nth-child(n + 3) { border-top: 1px solid var(--hairline); }
   .cgrid { grid-template-columns: repeat(2, 1fr); }
   .contact { grid-template-columns: 1fr; }
-  .header__phone { display: none; }
+}
+
+/* Hero stacks below 1024: image moves UNDER the text, full width, 16/10. */
+@media (max-width: 1024px) {
+  .hero { min-height: 0; }
+  .hero__inner { grid-template-columns: 1fr; padding-top: 56px; }
+  .hero__media {
+    order: 2;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+  }
+  .manifest { grid-template-columns: 1fr; gap: 12px; }
+  .manifest__result { justify-self: start; text-align: left; }
 }
 
 @media (max-width: 900px) {
@@ -1617,8 +1637,8 @@ body.nav-open { overflow: hidden; }
   .topbar__inner { justify-content: flex-end; }
   .header__inner { min-height: 64px; }
   .nav__link { min-height: 50px; }
-  .hero__inner { padding-block: 36px 26px; }
-  .hero__media { min-height: 200px; }
+  .nav__contact { display: flex; } /* topbar contacts are hidden here */
+  .hero__inner { padding-block: 48px 26px; }
   .hero__cta .btn { flex: 1 1 100%; }
   .hero__facts { display: grid; grid-template-columns: 1fr; }
   .hero__facts li { padding: 12px 0 0; }

@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Brand } from "./Brand";
 import { useLang } from "./LanguageProvider";
-import { icoPhone } from "./icons";
-import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { icoMail, icoPhone } from "./icons";
+import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
 
 const MOBILE_BREAKPOINT = 1180;
 
@@ -110,12 +110,12 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
+            {/* Visible only when the topbar contacts are hidden (<=640px),
+                so the phone never disappears from any viewport. */}
+            <a href={PHONE_HREF} className="nav__contact mono">{icoPhone}{PHONE_DISPLAY}</a>
+            <a href={EMAIL_HREF} className="nav__contact mono">{icoMail}{EMAIL}</a>
           </nav>
           <div className="header__actions">
-            <a href={PHONE_HREF} className="header__phone" aria-label={PHONE_DISPLAY}>
-              {icoPhone}
-              <span>{PHONE_DISPLAY}</span>
-            </a>
             <Link href="/contact" className="btn btn--primary btn--sm header__cta">{t.nav.quote}</Link>
             <button type="button" className="navtoggle" ref={toggleRef} aria-label={lang === "ka" ? "მენიუ" : "Menu"} aria-expanded={navOpen} aria-controls="nav" onClick={() => setNavOpen((v) => !v)}>
               <span /><span /><span />
