@@ -60,3 +60,8 @@ export, no backend; the quote form posts to Web3Forms.
 - Conventional commits; commit/push only when asked.
 - Acceptance gate for visual changes: side-by-side ka/en screenshots —
   the two languages are typographically different designs.
+- Regression law after every adoption (`pw-scratch/regress.js`): home
+  load <1s, clicks-to-quote ≤3, zero dead links, no 375px overflow.
+- lucide-animated (see global CLAUDE.md policy): POST-LAUNCH only here;
+  candidates are the quote-form success state and contact affordances —
+  never icon runs (the green-budget rule constrains those).
