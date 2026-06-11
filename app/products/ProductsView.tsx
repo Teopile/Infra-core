@@ -29,6 +29,8 @@ export function ProductsView() {
                   <span className="ccard__media">
                     <img
                       src={CATEGORY_IMAGE[cat.slug].src}
+                      width={CATEGORY_IMAGE[cat.slug].width}
+                      height={CATEGORY_IMAGE[cat.slug].height}
                       alt=""
                       loading={i < 3 ? "eager" : "lazy"}
                       fetchPriority={i === 0 ? "high" : undefined}

@@ -28,7 +28,7 @@ export function BrandsView() {
               const item = cat ? t.products.items[cat.index] : undefined;
               return (
                 <Link href={`/products/${b.slug}`} className="brandcard reveal" key={b.name}>
-                  <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} alt="" loading="lazy" decoding="async" />
+                  <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} width={CATEGORY_IMAGE[b.slug].width} height={CATEGORY_IMAGE[b.slug].height} alt="" loading="lazy" decoding="async" />
                   <div className="brandcard__body">
                     <h2 className="brandcard__name">{b.name}</h2>
                     {item ? <span className="brandcard__text">{item.d}</span> : null}

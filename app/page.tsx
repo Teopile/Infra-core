@@ -31,7 +31,9 @@ export default function Home() {
       {/* HERO — coal manifest */}
       <section className="hero">
         <div className="container hero__inner">
-          <div className="reveal">
+          {/* Above-the-fold: never reveal-gated — the h1 is the LCP element
+              and must paint before any JS arrives. */}
+          <div>
             <p className="hero__intro">{t.hero.eyebrow}</p>
             <h1 className="hero__title display">
               {titleAccent ? (
@@ -56,11 +58,11 @@ export default function Home() {
               ))}
             </ul>
           </div>
-          <div className="hero__media regmarks reveal">
-            <img src={heroImage.src} alt="" loading="eager" fetchPriority="high" decoding="async" />
+          <div className="hero__media regmarks">
+            <img src={heroImage.src} width={heroImage.width} height={heroImage.height} alt="" loading="eager" fetchPriority="high" decoding="async" />
           </div>
         </div>
-        <div className="container reveal">
+        <div className="container">
           <div className="manifest regmarks">
             <div className="manifest__label">{t.herocard.label}</div>
             <div className="manifest__rows">
@@ -109,7 +111,7 @@ export default function Home() {
               return (
                 <Link href={`/products/${cat.slug}`} className="ccard reveal" key={cat.slug}>
                   <span className="ccard__media">
-                    <img src={CATEGORY_IMAGE[cat.slug].src} alt="" loading="lazy" decoding="async" />
+                    <img src={CATEGORY_IMAGE[cat.slug].src} width={CATEGORY_IMAGE[cat.slug].width} height={CATEGORY_IMAGE[cat.slug].height} alt="" loading="lazy" decoding="async" />
                   </span>
                   <div className="ccard__body">
                     <h3 className="ccard__title">{item.t}</h3>
@@ -173,7 +175,7 @@ export default function Home() {
           <div className="brandgrid reveal">
             {suppliedBrands.map((b) => (
               <Link href={`/products/${b.slug}`} className="brandcard brandcard--sm" key={b.name}>
-                <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} alt="" loading="lazy" decoding="async" />
+                <img className="brandcard__img" src={CATEGORY_IMAGE[b.slug].src} width={CATEGORY_IMAGE[b.slug].width} height={CATEGORY_IMAGE[b.slug].height} alt="" loading="lazy" decoding="async" />
                 <div className="brandcard__body">
                   <h3 className="brandcard__name">{b.name}</h3>
                   <span className="brandcard__more">{t.products.more} <em aria-hidden="true">→</em></span>

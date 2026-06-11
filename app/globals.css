@@ -357,9 +357,11 @@ section[id], #main { scroll-margin-top: 132px; }
   letter-spacing: 0.005em;
 }
 
-/* Logo lockup colors (logotype: exempt from text-contrast rules). */
+/* Logo lockup colors. brand-700 on paper clears the 3:1 large-text bar
+   (20.5px/700 = large; brand-400 was 2.43:1); coal keeps the sage
+   brand-400, which measures ~7:1 there. */
 .brand__infra { color: var(--brand-900); }
-.brand__core { color: var(--brand-400); font-weight: 700; }
+.brand__core { color: var(--brand-700); font-weight: 700; }
 
 .brand--light .brand__infra { color: var(--paper); }
 .brand--light .brand__core { color: var(--brand-400); }

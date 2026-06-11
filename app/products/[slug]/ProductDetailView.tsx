@@ -37,7 +37,7 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
         <div className="container detail">
           <div className="reveal">
             <figure className="dphoto regmarks">
-              <img src={CATEGORY_IMAGE[slug].src} alt="" loading="eager" fetchPriority="high" decoding="async" />
+              <img src={CATEGORY_IMAGE[slug].src} width={CATEGORY_IMAGE[slug].width} height={CATEGORY_IMAGE[slug].height} alt="" loading="eager" fetchPriority="high" decoding="async" />
             </figure>
             <h2 className="detail__h">{t.pages.included}</h2>
             <ul className="ticklist">
@@ -86,7 +86,7 @@ export function ProductDetailView({ slug }: { slug: ProductSlug }) {
               return (
                 <Link href={`/products/${c.slug}`} className="ccard reveal" key={c.slug}>
                   <span className="ccard__media">
-                    <img src={CATEGORY_IMAGE[c.slug].src} alt="" loading="lazy" decoding="async" />
+                    <img src={CATEGORY_IMAGE[c.slug].src} width={CATEGORY_IMAGE[c.slug].width} height={CATEGORY_IMAGE[c.slug].height} alt="" loading="lazy" decoding="async" />
                   </span>
                   <div className="ccard__body">
                     <h3 className="ccard__title">{ri.t}</h3>

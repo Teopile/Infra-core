@@ -107,6 +107,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ka" data-lang="ka" className={`${archivo.variable} ${plexMono.variable} ${notoGeorgian.variable}`} suppressHydrationWarning>
       <body>
+        {/* next/font fails to emit preloads in this export, so the hero font
+            arrives after CSS and the swap costs ~5.6s LCP render delay +
+            CLS 0.199 on throttled mobile (measured). Explicit preloads for
+            the above-fold-critical files (React hoists <link> to <head>).
+            Hashes are content-stable; refresh them from out/_next/static/css
+            after a next/font version bump (stale = harmless 404 hint). */}
+        <link rel="preload" href={`${BP}/_next/static/media/a6c4972a91679e5a-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${BP}/_next/static/media/95058a9c3e49a56e-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        <link rel="preload" href={`${BP}/_next/static/media/c214ffb7f5362987-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <LanguageProvider>
           <SkipLink />
           <TopBar />
