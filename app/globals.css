@@ -377,25 +377,18 @@ section[id], #main { scroll-margin-top: 132px; }
   font-weight: 700;
   line-height: 1.2;
   white-space: nowrap;
-  transition: color 0.2s var(--ease);
-}
-
-.nav__link::after {
-  content: "";
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: -2px; /* sits on the header's ink rule */
-  height: 2px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.22s var(--ease);
+  /* Underline anchored to the TEXT, not the nav box: baseline-relative,
+     so KA and EN glyph metrics each get the same 5px optical gap. */
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: transparent;
+  text-underline-offset: 5px;
+  transition: color 0.2s var(--ease), text-decoration-color 0.2s var(--ease);
 }
 
 .nav__link:hover { color: var(--ink); }
-.nav__link:hover::after,
-.nav__link[aria-current]::after { transform: scaleX(1); }
+.nav__link:hover,
+.nav__link[aria-current] { text-decoration-color: var(--accent); }
 .nav__link[aria-current] { color: var(--ink); }
 
 .header__actions {
@@ -668,7 +661,7 @@ html[data-lang="ka"] .hero__title {
 /* Title block: h2 + numeral annotation seated on a 2px ink rule. */
 .tb {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline; /* true text baselines, not box bottoms */
   justify-content: space-between;
   gap: 20px;
   padding-bottom: 14px;
@@ -689,14 +682,12 @@ html[data-lang="ka"] .tb__title { font-size: clamp(1.3rem, 2.3vw, 1.85rem); }
   font-size: 0.85rem;
   letter-spacing: 0.04em;
   white-space: nowrap;
-  padding-bottom: 4px;
 }
 
 .tb__link {
   display: inline-flex;
   align-items: baseline;
   gap: 8px;
-  padding-bottom: 4px;
   color: var(--brand-900); /* small text: brand-700 is 3.91:1, below AA */
   font-size: 0.92rem;
   font-weight: 700;
@@ -1020,38 +1011,35 @@ a.svc__row:hover { background: var(--brand-50); }
    ------------------------------------------------------------ */
 
 .steps {
-  position: relative;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
 }
 
-.steps::before {
-  content: "";
-  position: absolute;
-  top: 17px;
-  /* Full run; the numerals' opaque background masks the line behind them. */
-  left: 0;
-  right: calc((100% - 56px) / 3 + 28px);
-  height: 1px;
-  background: var(--hairline-2);
-}
-
 .step { position: relative; }
 
+/* Number + trailing rule, centered on the numeral's optical center —
+   the rule is anchored to the number itself, never the section box. */
 .step__num {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   margin-bottom: 14px;
-  padding-right: 12px;
   font-family: var(--f-mono);
   font-weight: 600;
   font-size: 1.7rem;
+  line-height: 1;
   color: var(--accent-text);
-  background-color: var(--paper);
 }
 
-.section--panel .step__num { background-color: var(--panel); }
+.step__num::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--hairline-2);
+  /* lining digits sit slightly above the box center; nudge to cap midline */
+  transform: translateY(-0.06em);
+}
 
 .step__t { margin-bottom: 8px; font-size: 1.05rem; }
 .step__d { color: var(--muted); font-size: 0.95rem; }
@@ -1452,7 +1440,7 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 
 .phero__row {
   display: flex;
-  align-items: flex-end;
+  align-items: baseline; /* title and route stamp share a baseline */
   justify-content: space-between;
   gap: 20px;
   padding-bottom: 16px;
@@ -1470,9 +1458,8 @@ html[data-lang="ka"] .phero__title { font-size: clamp(1.45rem, 3.2vw, 2.15rem); 
   font-family: var(--f-mono);
   color: var(--muted);
   font-size: 0.82rem;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em; /* unified micro-label tracking */
   white-space: nowrap;
-  padding-bottom: 6px;
 }
 
 .phero__lead {
@@ -1618,7 +1605,7 @@ html.js-reveal .reveal.is-visible {
   .tb__link em,
   .float,
   .skip-link,
-  .nav__link::after,
+  .nav__link,
   .navtoggle span,
   a.svc__row {
     transition: none !important;
@@ -1670,7 +1657,7 @@ body.nav-open { overflow: hidden; }
     border-bottom: 1px solid var(--hairline);
   }
 
-  .nav__link::after { display: none; }
+  .nav__link { text-decoration: none; } /* drawer rows: no underline */
   .nav__link[aria-current] { color: var(--brand-900); }
   .navtoggle { display: inline-flex; }
   .header__cta { display: none; }
@@ -1704,7 +1691,6 @@ body.nav-open { overflow: hidden; }
   .why3__item { padding: 20px 0; }
   .why3__item + .why3__item { padding-left: 0; border-left: 0; border-top: 1px solid var(--hairline-2); }
   .steps { grid-template-columns: 1fr; gap: 26px; }
-  .steps::before { display: none; }
   .footer__inner { grid-template-columns: 1fr 1fr; }
   .footer__brandcol { grid-column: 1 / -1; }
   .detail { grid-template-columns: 1fr; }
