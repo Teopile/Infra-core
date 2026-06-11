@@ -86,6 +86,20 @@ export const viewport: Viewport = {
   themeColor: "#0B6854",
 };
 
+/* JSON.stringify does not escape `</script>` or the U+2028/U+2029 line
+   separators, so a stray value could break out of this inline <script>. Every
+   input below is owner-controlled, but encode the HTML-significant characters
+   as their JSON \u escapes (valid JSON, parses identically) so the sink is
+   safe by construction rather than by assumption. */
+function safeJsonLd(value: unknown): string {
+  return JSON.stringify(value)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026")
+    .replace(new RegExp(String.fromCharCode(0x2028), "g"), "\\u2028")
+    .replace(new RegExp(String.fromCharCode(0x2029), "g"), "\\u2029");
+}
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
@@ -129,7 +143,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </LanguageProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
         />
       </body>
     </html>

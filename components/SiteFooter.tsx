@@ -25,10 +25,10 @@ export function SiteFooter() {
           {FB_CONFIGURED || LI_CONFIGURED ? (
             <div className="footer__social">
               {FB_CONFIGURED ? (
-                <a href={FB_URL} target="_blank" rel="noopener" aria-label="Facebook">{icoFb}</a>
+                <a href={FB_URL} target="_blank" rel="noopener noreferrer" aria-label="Facebook">{icoFb}</a>
               ) : null}
               {LI_CONFIGURED ? (
-                <a href={LI_URL} target="_blank" rel="noopener" aria-label="LinkedIn">{icoLi}</a>
+                <a href={LI_URL} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">{icoLi}</a>
               ) : null}
             </div>
           ) : null}

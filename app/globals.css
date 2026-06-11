@@ -1229,6 +1229,10 @@ html[data-lang="ka"] .ctaband__title { font-size: clamp(1.3rem, 2.6vw, 1.8rem); 
 
 .consent:has(input[aria-invalid="true"]) { color: var(--danger); }
 
+/* Turnstile widget breathing room (rendered only when a site key is set). */
+.qform__captcha { margin: 16px 0 0; }
+.ctaband__captcha { margin: 12px 0 0; }
+
 .qform__submit { width: 100%; }
 
 .qform__status {
