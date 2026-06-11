@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Archivo, IBM_Plex_Mono, Noto_Sans_Georgian } from "next/font/google";
 import { dictionaries } from "@/lib/dictionaries";
+import { SITE_URL } from "@/lib/site";
 import { LanguageProvider } from "@/components/LanguageProvider";
 import { SkipLink } from "@/components/SkipLink";
 import { TopBar } from "@/components/TopBar";
@@ -36,7 +37,6 @@ const plexMono = IBM_Plex_Mono({
 });
 
 const ka = dictionaries.ka;
-const SITE_URL = "https://infracoregeorgia.com";
 /* GitHub Pages serves the site under /Infra-core; path-based assets must
    carry the prefix there (static imports handle their own). */
 const BP = process.env.DEPLOY_TARGET === "pages" ? "/Infra-core" : "";
@@ -68,19 +68,16 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     images: [
       {
-        url: `${BP}/assets/og/og-cover.png`,
+        url: `${BP}/assets/og/og-cover.jpg`,
         width: 1200,
         height: 630,
         alt: "Infra Core — სრული IT გადაწყვეტილებები ბიზნესისთვის",
       },
     ],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: ka.meta.title,
-    description: "ერთი მომწოდებელი მთელი ოფისისთვის — ტექნიკა, ქსელი, ლიცენზიები და მხარდაჭერა.",
-    images: [`${BP}/assets/og/og-cover.png`],
-  },
+  /* No root twitter block: a parent twitter object overrides per-page og
+     titles on X with homepage-frozen values. With none declared, X reads
+     each page's og:* tags — correct titles everywhere. */
 };
 
 export const viewport: Viewport = {
@@ -98,7 +95,7 @@ const jsonLd = {
   email: "info@infracore-consulting.com",
   // Real number flows in from the env once configured; omitted until then.
   ...(process.env.NEXT_PUBLIC_PHONE_TEL ? { telephone: process.env.NEXT_PUBLIC_PHONE_TEL } : {}),
-  image: `${SITE_URL}/assets/og/og-cover.png`,
+  image: `${SITE_URL}/assets/og/og-cover.jpg`,
   address: { "@type": "PostalAddress", addressCountry: "GE" },
   areaServed: "GE",
 };

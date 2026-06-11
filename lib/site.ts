@@ -4,6 +4,10 @@
 
 import type { Lang } from "./dictionaries";
 
+/* Canonical origin for metadata/sitemap/robots. LAUNCH: when
+   infracoregeorgia.com DNS goes live, swap this ONE line. */
+export const SITE_URL = "https://infra-core-one.vercel.app";
+
 export const WEB3_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
 export const TG_URL = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/";
 export const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "995500000000";
@@ -43,4 +47,4 @@ export const WA_CONFIGURED = Boolean(process.env.NEXT_PUBLIC_WHATSAPP_NUMBER);
    openGraph wholesale when a page defines its own, so pages must restate
    the image. DEPLOY_TARGET is build-time-only (server metadata path). */
 const BP = process.env.DEPLOY_TARGET === "pages" ? "/Infra-core" : "";
-export const OG_IMAGE = `${BP}/assets/og/og-cover.png`;
+export const OG_IMAGE = `${BP}/assets/og/og-cover.jpg`;

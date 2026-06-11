@@ -4,7 +4,7 @@ import { serviceSlugs } from "@/lib/serviceCatalog";
 
 export const dynamic = "force-static";
 
-const BASE = "https://infracoregeorgia.com";
+import { SITE_URL as BASE } from "@/lib/site";
 
 // Static routes + one entry per product category. Trailing slashes match the
 // `trailingSlash: true` export setting.
