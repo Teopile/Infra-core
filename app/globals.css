@@ -1,9 +1,22 @@
 /* ============================================================
    Infra Core — "Industrial Requisition" design system (Rev B)
-   Ink-on-white trade manifest. Coal hero/footer. Safety-orange
-   actions. Mono = Latin/digit requisition voice only.
+   Ink-on-white trade manifest. Coal hero/footer. InfraCore brand
+   greens for actions. Mono = Latin/digit requisition voice only.
    See DESIGN.md for the full contract.
    ============================================================ */
+
+/* Metric-matched fallback for the Georgian heading tier. While the Noto
+   webfont loads on slow connections, the system Noto Sans Georgian
+   renders headings ~8% wider (synthetic 800), wrapping the hero title
+   one line taller; the swap then shifted everything below it (CLS 0.198
+   measured at 412px). size-adjust scales the fallback's advances to the
+   webfont's so the line count — and the layout — is identical pre/post
+   swap. Ratio measured against the loaded webfont (1904/2061 = 92.4%). */
+@font-face {
+  font-family: "Georgian Display Fallback";
+  src: local("Noto Sans Georgian"), local("Sylfaen");
+  size-adjust: 92.4%;
+}
 
 :root {
   /* Materials */
@@ -32,7 +45,7 @@
 
   /* Type voices (language-scoped heading stack set below) */
   --f-body: var(--font-noto-georgian), "Noto Sans Georgian", system-ui, sans-serif;
-  --f-head: var(--font-noto-georgian), "Noto Sans Georgian", system-ui, sans-serif;
+  --f-head: var(--font-noto-georgian-head), "Georgian Display Fallback", "Noto Sans Georgian", system-ui, sans-serif;
   --f-mono: var(--font-mono), "IBM Plex Mono", ui-monospace, monospace;
 
   /* Layout */

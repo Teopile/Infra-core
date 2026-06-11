@@ -11,11 +11,32 @@ import { Floats } from "@/components/Floats";
 import { QuoteBar } from "@/components/QuoteBar";
 import "./globals.css";
 
+/* Body voice: keeps next/font's auto-adjusted fallback — measured
+   layout-stable for Mkhedruli body text across the swap. */
 const notoGeorgian = Noto_Sans_Georgian({
   subsets: ["georgian", "latin"],
   weight: ["400", "600", "700", "800"],
   display: "swap",
   variable: "--font-noto-georgian",
+});
+
+/* Heading voice: same family WITHOUT the auto fallback. That Arial-based
+   face claims Mtavruli glyphs (modern Arial has them) at wide metrics,
+   wrapping the hero title one line taller pre-swap (measured CLS 0.198).
+   With it gone, the metric-matched "Georgian Display Fallback" in
+   globals.css renders headings at webfont geometry — zero swap shift.
+   Same woff2 files as the body instance (content-hashed, deduped). */
+const notoGeorgianHead = Noto_Sans_Georgian({
+  /* Georgian subset ONLY — one woff2, so the heading swap is atomic.
+     With latin included, the latin file landing first put the pending
+     Georgian glyphs on the system last-resort font for ~300ms (title
+     grew a line, then shrank: two counted shifts, CLS 0.39 measured).
+     Heading Latin renders from the size-adjusted local Noto instead. */
+  subsets: ["georgian"],
+  weight: ["700", "800"],
+  display: "swap",
+  variable: "--font-noto-georgian-head",
+  adjustFontFallback: false,
 });
 
 /* Latin display voice: variable Archivo carries the width axis the
@@ -105,7 +126,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
      globals.css are declared on :root, and var() substitution happens where
      a custom property is declared, not where it is used. */
   return (
-    <html lang="ka" data-lang="ka" className={`${archivo.variable} ${plexMono.variable} ${notoGeorgian.variable}`} suppressHydrationWarning>
+    <html lang="ka" data-lang="ka" className={`${archivo.variable} ${plexMono.variable} ${notoGeorgian.variable} ${notoGeorgianHead.variable}`} suppressHydrationWarning>
       <body>
         {/* next/font fails to emit preloads in this export, so the hero font
             arrives after CSS and the swap costs ~5.6s LCP render delay +
@@ -114,6 +135,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Hashes are content-stable; refresh them from out/_next/static/css
             after a next/font version bump (stale = harmless 404 hint). */}
         <link rel="preload" href={`${BP}/_next/static/media/a6c4972a91679e5a-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Same Georgian glyphs, second URL: the heading font instance emits
+            its own copy. Both must land in one burst or the hero re-wraps
+            in the gap between them (measured 2x0.195 CLS). */}
+        <link rel="preload" href={`${BP}/_next/static/media/a6c4972a91679e5a.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${BP}/_next/static/media/95058a9c3e49a56e-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href={`${BP}/_next/static/media/c214ffb7f5362987-s.p.woff2`} as="font" type="font/woff2" crossOrigin="anonymous" />
         <LanguageProvider>
