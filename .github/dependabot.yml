@@ -1,14 +1,21 @@
 version: 2
 updates:
-  # Keep the SHA-pinned GitHub Actions current as new releases ship.
+  # GitHub Actions — group into one PR. Majors are allowed here: action major
+  # bumps are how we move off the deprecated Node 20 runner.
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
       interval: weekly
     commit-message:
       prefix: ci
+    groups:
+      github-actions:
+        patterns: ["*"]
 
-  # Surface npm dependency and security updates (Next.js, etc.).
+  # npm — patch/minor only, grouped to cut noise. Major bumps (Next, React,
+  # TypeScript, @types/*) carry breaking changes and need a deliberate, tested
+  # migration, not an auto-PR — so they are ignored here. Dependabot *security*
+  # updates still fire for known advisories regardless of this ignore.
   - package-ecosystem: npm
     directory: "/"
     schedule:
@@ -16,3 +23,9 @@ updates:
     commit-message:
       prefix: chore
     open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
+    groups:
+      npm-minor-patch:
+        update-types: ["minor", "patch"]
