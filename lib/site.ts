@@ -4,11 +4,23 @@
 
 import type { Lang } from "./dictionaries";
 
-/* Canonical origin for metadata/sitemap/robots. LAUNCH: when
-   infracoregeorgia.com DNS goes live, swap this ONE line. */
-export const SITE_URL = "https://infra-core-one.vercel.app";
+/* Canonical origin for metadata/sitemap/robots. The GitHub Pages build
+   (DEPLOY_TARGET=pages) serves under teopile.github.io/Infra-core, so its
+   sitemap/robots must advertise that origin — not the Vercel one. LAUNCH:
+   when infracoregeorgia.com DNS goes live, swap the Vercel branch. */
+export const SITE_URL =
+  process.env.DEPLOY_TARGET === "pages"
+    ? "https://teopile.github.io/Infra-core"
+    : "https://infra-core-one.vercel.app";
 
 export const WEB3_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
+
+/* Cloudflare Turnstile site key for the quote forms. Public by design (it is
+   the client-side widget key, validated server-side by Web3Forms). When unset
+   the forms fall back to the honeypot-only path — render-nothing-until-
+   configured, like the WA/TG/FB channels. */
+export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
+export const TURNSTILE_CONFIGURED = Boolean(TURNSTILE_SITE_KEY);
 export const TG_URL = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/";
 export const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "995500000000";
 export const PHONE_DISPLAY = process.env.NEXT_PUBLIC_PHONE_DISPLAY || "+995 5XX XX XX XX";

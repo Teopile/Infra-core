@@ -30,12 +30,12 @@ export function ContactView() {
             {WA_CONFIGURED || FB_CONFIGURED ? (
               <div className="channels">
                 {WA_CONFIGURED ? (
-                  <a className="btn btn--outline" href={waHref(lang)} target="_blank" rel="noopener">
+                  <a className="btn btn--outline" href={waHref(lang)} target="_blank" rel="noopener noreferrer">
                     {icoWa}{t.contact.instantWa}
                   </a>
                 ) : null}
                 {FB_CONFIGURED ? (
-                  <a className="btn btn--outline" href={FB_MSG_URL} target="_blank" rel="noopener">
+                  <a className="btn btn--outline" href={FB_MSG_URL} target="_blank" rel="noopener noreferrer">
                     {icoFb}{t.contact.instantFb}
                   </a>
                 ) : null}

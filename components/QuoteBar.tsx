@@ -19,7 +19,7 @@ export function QuoteBar() {
         {icoPhone}
       </a>
       {WA_CONFIGURED ? (
-        <a href={waHref(lang)} className="quotebar__tel quotebar__wa" target="_blank" rel="noopener" aria-label={t.floats.wa}>
+        <a href={waHref(lang)} className="quotebar__tel quotebar__wa" target="_blank" rel="noopener noreferrer" aria-label={t.floats.wa}>
           {icoWa}
         </a>
       ) : null}

@@ -64,6 +64,8 @@ export interface Dict {
     consentErr: string;
     notConfigured: string;
     emailErr: string;
+    captchaErr: string;
+    tooSoon: string;
   };
   footer: {
     tag: string;
@@ -210,6 +212,8 @@ const ka: Dict = {
     notConfigured:
       "ფორმა ჯერ არ არის კონფიგურირებული (იხ. README). სანაცვლოდ მოგვწერეთ: info@infracore-consulting.com",
     emailErr: "გთხოვთ, შეიყვანოთ სწორი ელ. ფოსტა.",
+    captchaErr: "გთხოვთ, დაადასტურეთ, რომ ადამიანი ხართ.",
+    tooSoon: "გთხოვთ, დაიცადეთ რამდენიმე წამი და სცადეთ ხელახლა.",
   },
   footer: {
     tag: "ერთი მომწოდებელი მთელი ოფისისთვის — ტექნიკა, ქსელი, ლიცენზიები და მხარდაჭერა.",
@@ -391,6 +395,8 @@ const en: Dict = {
     notConfigured:
       "The form is not configured yet (see README). In the meantime, email us: info@infracore-consulting.com",
     emailErr: "Please enter a valid email address.",
+    captchaErr: "Please confirm you're human.",
+    tooSoon: "Please wait a few seconds before sending again.",
   },
   footer: {
     tag: "One supplier for the whole office — hardware, networking, licensing and support.",

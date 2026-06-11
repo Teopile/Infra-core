@@ -16,7 +16,7 @@ export function TopBar() {
         <div className="topbar__contacts">
           <a href={PHONE_HREF} className="topbar__link">{icoPhone}{PHONE_DISPLAY}</a>
           {WA_CONFIGURED ? (
-            <a href={waHref(lang)} className="topbar__link" target="_blank" rel="noopener" aria-label={t.floats.wa}>{icoWa}WhatsApp</a>
+            <a href={waHref(lang)} className="topbar__link" target="_blank" rel="noopener noreferrer" aria-label={t.floats.wa}>{icoWa}WhatsApp</a>
           ) : null}
           <a href={EMAIL_HREF} className="topbar__link">{icoMail}{EMAIL}</a>
           <span className="topbar__note">{t.footer.built}</span>
