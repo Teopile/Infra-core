@@ -6,12 +6,12 @@ import type { Lang } from "./dictionaries";
 
 /* Canonical origin for metadata/sitemap/robots. The GitHub Pages build
    (DEPLOY_TARGET=pages) serves under teopile.github.io/Infra-core, so its
-   sitemap/robots must advertise that origin — not the Vercel one. LAUNCH:
-   when infracoregeorgia.com DNS goes live, swap the Vercel branch. */
+   sitemap/robots must advertise that origin — not the production one.
+   Production: the real domain (live on Cloudflare DNS since 2026-06-12). */
 export const SITE_URL =
   process.env.DEPLOY_TARGET === "pages"
     ? "https://teopile.github.io/Infra-core"
-    : "https://infra-core-one.vercel.app";
+    : "https://infracoregeorgia.com";
 
 export const WEB3_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
 
