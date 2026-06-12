@@ -58,6 +58,24 @@ export function AboutView() {
         </div>
       </section>
 
+      {/* Requisites — verifiable company identity (procurement/bank checks) */}
+      <section className="section" id="identity" aria-labelledby="id-title">
+        <div className="container">
+          <div className="tb reveal">
+            <h2 id="id-title" className="tb__title display">{displayText(lang, t.identity.title)}</h2>
+            <span className="tb__meta">{nn(t.identity.rows.length)}</span>
+          </div>
+          <dl className="idrows reveal">
+            {t.identity.rows.map((r) => (
+              <div className="idrow" key={r.k}>
+                <dt className="idrow__k">{r.k}</dt>
+                <dd className={r.mono ? "idrow__v mono" : "idrow__v"}>{r.v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
       <CtaBand />
     </>
   );

@@ -55,7 +55,7 @@ export function SiteFooter() {
       </div>
       <div className="footer__bottom">
         <div className="container footer__bottominner">
-          <span suppressHydrationWarning>© {new Date().getFullYear()} Infra Core. <span>{t.footer.rights}</span></span>
+          <span suppressHydrationWarning>© {new Date().getFullYear()} {t.footer.legal} · <span>{t.footer.rights}</span></span>
           <span className="footer__muted">{t.footer.built}</span>
         </div>
       </div>

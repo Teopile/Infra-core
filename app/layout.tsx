@@ -125,13 +125,23 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   name: "Infra Core",
+  legalName: "Infra Core LTD",
+  alternateName: "შპს ინფრა ქორ",
+  // Georgian company identification code (also the tax id).
+  taxID: "405842824",
+  foundingDate: "2026-03",
   description: "B2B IT solutions and office-equipment reseller in Georgia.",
   url: `${SITE_URL}/`,
   email: "info@infracore-consulting.com",
   // Real number flows in from the env once configured; omitted until then.
   ...(process.env.NEXT_PUBLIC_PHONE_TEL ? { telephone: process.env.NEXT_PUBLIC_PHONE_TEL } : {}),
   image: `${SITE_URL}/assets/og/og-cover.jpg`,
-  address: { "@type": "PostalAddress", addressCountry: "GE" },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Nino Ramishvili St. #2",
+    addressLocality: "Tbilisi",
+    addressCountry: "GE",
+  },
   areaServed: "GE",
 };
 

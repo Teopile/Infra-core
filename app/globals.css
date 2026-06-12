@@ -1746,3 +1746,13 @@ body.nav-open { overflow: hidden; }
   body { padding-bottom: 53px; } /* room for the fixed quote bar */
   .footer__inner { grid-template-columns: 1fr; gap: 24px; }
 }
+
+/* ---------- Requisites (About) — verifiable identity rows ---------- */
+.idrows { max-width: 760px; margin: 0; border-top: 2px solid var(--ink); }
+.idrow { display: grid; grid-template-columns: 240px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--hairline); }
+.idrow__k { margin: 0; font-size: 0.82rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; padding-top: 3px; }
+html[data-lang="ka"] .idrow__k { letter-spacing: 0; }
+.idrow__v { margin: 0; font-weight: 600; color: var(--ink); overflow-wrap: anywhere; }
+@media (max-width: 640px) {
+  .idrow { grid-template-columns: 1fr; gap: 4px; padding: 12px 0; }
+}

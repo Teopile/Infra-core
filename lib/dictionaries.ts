@@ -35,6 +35,8 @@ export interface Dict {
   why: { eyebrow: string; title: string; items: Item[] };
   vendors: { eyebrow: string; title: string; brands: string[]; note: string };
   process: { eyebrow: string; title: string; steps: Item[] };
+  /** Verifiable company requisites (About page + structured data). */
+  identity: { title: string; rows: { k: string; v: string; mono?: boolean }[] };
   contact: {
     eyebrow: string;
     title: string;
@@ -74,6 +76,8 @@ export interface Dict {
     contact: string;
     productLinks: string[];
     serviceLinks: string[];
+    /** Legal entity + ID code line in the bottom bar. */
+    legal: string;
     rights: string;
     built: string;
     privacy: string;
@@ -184,11 +188,20 @@ const ka: Dict = {
       { t: "გარანტია და მხარდაჭერა", d: "ვრჩებით თქვენთან — ოფიციალური გარანტიითა და ტექნიკური მხარდაჭერით." },
     ],
   },
+  identity: {
+    title: "რეკვიზიტები",
+    rows: [
+      { k: "იურიდიული სახელი", v: "შპს ინფრა ქორ (Infra Core LTD)" },
+      { k: "საიდენტიფიკაციო კოდი", v: "405842824", mono: true },
+      { k: "მისამართი", v: "თბილისი, ნინო რამიშვილის ქ. №2" },
+      { k: "დაარსდა", v: "2026, მარტი" },
+    ],
+  },
   contact: {
     eyebrow: "დაგვიკავშირდით",
     title: "გვითხარით, რა სჭირდება თქვენს ოფისს",
     lead: "შეავსეთ ფორმა და მიიღეთ შეთავაზება — დაგიკავშირდებით უმოკლეს დროში.",
-    city: "საქართველო",
+    city: "თბილისი, ნინო რამიშვილის ქ. №2",
     instantWa: "მოგვწერეთ WhatsApp-ში",
     instantFb: "მოგვწერეთ Facebook-ზე",
   },
@@ -222,6 +235,7 @@ const ka: Dict = {
     contact: "კონტაქტი",
     productLinks: ["კომპიუტერები და Mini PC", "ქსელის აღჭურვილობა", "პრინტერები", "პროგრამები და ლიცენზიები"],
     serviceLinks: ["ოფიციალური გარანტია", "მიწოდება და მონტაჟი", "კონსულტაცია და მხარდაჭერა", "IT ინფრასტრუქტურა"],
+    legal: "შპს ინფრა ქორ · ს/კ 405842824",
     rights: "ყველა უფლება დაცულია.",
     built: "საქართველო · B2B IT გადაწყვეტილებები",
     privacy: "კონფიდენციალურობა",
@@ -367,11 +381,20 @@ const en: Dict = {
       { t: "Warranty & support", d: "We stay with you — with official warranty and technical support." },
     ],
   },
+  identity: {
+    title: "Company details",
+    rows: [
+      { k: "Legal name", v: "Infra Core LTD (შპს ინფრა ქორ)" },
+      { k: "Identification code", v: "405842824", mono: true },
+      { k: "Address", v: "Tbilisi, Nino Ramishvili St. #2" },
+      { k: "Founded", v: "March 2026" },
+    ],
+  },
   contact: {
     eyebrow: "Get in touch",
     title: "Tell us what your office needs",
     lead: "Fill in the form and get a quote — we'll get back to you shortly.",
-    city: "Georgia",
+    city: "Tbilisi, Nino Ramishvili St. #2",
     instantWa: "Message us on WhatsApp",
     instantFb: "Message us on Facebook",
   },
@@ -405,6 +428,7 @@ const en: Dict = {
     contact: "Contact",
     productLinks: ["Computers & Mini PCs", "Networking", "Printers", "Software & licensing"],
     serviceLinks: ["Official warranty", "Delivery & deployment", "Consultation & support", "IT infrastructure"],
+    legal: "Infra Core LTD · ID 405842824",
     rights: "All rights reserved.",
     built: "Georgia · B2B IT solutions",
     privacy: "Privacy",
