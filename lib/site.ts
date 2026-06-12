@@ -16,11 +16,15 @@ export const SITE_URL =
 export const WEB3_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "";
 
 /* Cloudflare Turnstile site key for the quote forms. Public by design (it is
-   the client-side widget key, validated server-side by Web3Forms). When unset
-   the forms fall back to the honeypot-only path — render-nothing-until-
-   configured, like the WA/TG/FB channels. */
-export const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "";
-export const TURNSTILE_CONFIGURED = Boolean(TURNSTILE_SITE_KEY);
+   the client-side widget key, embedded in the page for every visitor; the
+   secret half lives in the Web3Forms dashboard, which is what actually
+   validates the token). Defaulted to the live widget so the forms are
+   protected on every deploy target without a per-environment env step; an env
+   var overrides it (e.g. a different key per environment). Set the env to a
+   single space to disable and fall back to the honeypot-only path. */
+export const TURNSTILE_SITE_KEY =
+  process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || "0x4AAAAAADjcHEO5RwLSwpk";
+export const TURNSTILE_CONFIGURED = Boolean(TURNSTILE_SITE_KEY.trim());
 export const TG_URL = process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/";
 export const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "995500000000";
 export const PHONE_DISPLAY = process.env.NEXT_PUBLIC_PHONE_DISPLAY || "+995 5XX XX XX XX";
